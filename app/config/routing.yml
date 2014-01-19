@@ -1,0 +1,4 @@
+brainstrap_core_nc:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing.yml"
+    prefix:   /
+
