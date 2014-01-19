@@ -1,0 +1,3 @@
+brainstrap_core_nc_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BrainstrapCoreNCBundle:Default:index }
