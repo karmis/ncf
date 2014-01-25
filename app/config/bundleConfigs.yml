@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@BrainstrapCoreNCUserBundle/Resources/config/config.yml" }

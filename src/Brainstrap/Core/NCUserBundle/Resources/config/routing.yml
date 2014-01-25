@@ -1,0 +1,18 @@
+fos_user_security:
+    resource: "@BrainstrapCoreNCUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@BrainstrapCoreNCUserBundle/Resources/config/routing/profile.xml"
+    prefix: /settings/accounts/profile
+
+fos_user_register:
+    resource: "@BrainstrapCoreNCUserBundle/Resources/config/routing/registration.xml"
+    prefix: /settings/accounts/register
+
+fos_user_resetting:
+    resource: "@BrainstrapCoreNCUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /settings/accounts/resetting
+
+fos_user_change_password:
+    resource: "@BrainstrapCoreNCUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /settings/accounts/profile
