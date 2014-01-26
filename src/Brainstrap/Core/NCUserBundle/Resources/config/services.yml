@@ -1,0 +1,6 @@
+services:
+    brainstrap_nc_user.registration.form.type:
+        class: Brainstrap\Core\NCUserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: brainstrap_nc_user_registration }

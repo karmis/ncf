@@ -68,3 +68,15 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+iphp_file_store:
+    mappings:
+        userAvatar:
+            upload_dir:  %kernel.root_dir%/../web/uploads/user/documents/avatars
+            upload_path: /uploads/user/documents/avatars
+            directory_namer: 
+                property:
+                    params: { field : "id"}
+            namer:
+                propertyPrefix:
+                    params: { use_field_name : true, delimiter: "_", field : "id" }

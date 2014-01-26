@@ -2,3 +2,7 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Brainstrap\Core\NCUserBundle\Entity\User
+    registration:
+        form:
+            type: brainstrap_nc_user_registration
+            validation_groups: [NCUserRegistration, NCUserProfile]
