@@ -1,0 +1,17 @@
+{
+	"name": "NCF",
+    "version": "0.01",
+    "dependencies": {
+      "bootstrap": "bootstrap#latest",
+      "jquery": "jquery#latest",
+      "jquery-ui": "jquery-ui#latest",
+      "fontawesome": "components-font-awesome#latest",
+      "jquery-mousewheel": "#latest",
+      "excanvas": "#latest",
+      "jquery-flot": "#latest",
+      "flot": "#latest",
+      "sparkline": "#latest",
+      "jquery-sortable": "#latest",
+      "jquery-ui.resizable-snap-extension": "#latest"
+    }
+}
