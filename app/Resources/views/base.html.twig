@@ -1,13 +1,66 @@
 <!DOCTYPE html>
+{#             'bundles/brainstrapwc/css/style.css' 'bundles/brainstrapwc/js/main.js' #}
 <html>
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+        {% stylesheets
+            'bower/components/jquery-ui/themes/base/minified/jquery-ui.min.css'
+            'bower/components/bootstrap/dist/css/bootstrap.min.css'
+            'bower/components/fontawesome/css/font-awesome.min.css'
+
+            'bundles/brainstrapcorenc/css/bootstrap.css'
+            'bundles/brainstrapcorenc/css/reset.css'
+            'bundles/brainstrapcorenc/css/ui_custom.css'
+            'bundles/brainstrapcorenc/css/font.css'
+            'bundles/brainstrapcorenc/css/plugins.css'
+            'bundles/brainstrapcorenc/css/datatable.css'
+            
+            'bundles/brainstrapcorenc/css/prettyPhoto.css'
+            'bundles/brainstrapcorenc/css/fullcalendar.css'
+            'bundles/brainstrapcorenc/css/elfinder.css'
+            'bundles/brainstrapcorenc/css/fancybox.css'
+
+            'bundles/brainstrapcorenc/css/styles.css'
+
+        filter='cssrewrite' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% block stylesheets %}{% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+            {% block top%}{% endblock top %}
+            
+            {% block loginWrapper %}{% endblock loginWrapper %}
+
+
+            {% block sidebar %}
+                {% block mainNav %}{% endblock mainNav %}
+                {% block secNav %}{% endblock secNav %}
+            {% endblock sidebar %}
+            
+
+
+            {% block content %}
+                {% block contentTop %}{% endblock contentTop %}
+                {% block breadLine %}{% endblock breadLine %}
+                {% block wrapper %}{% endblock wrapper %}
+            {% endblock content %}
+        {% endblock %}
+
+        {% javascripts
+            'bower/components/jquery/jquery.min.js'
+            'bower/components/jquery-ui/ui/minified/jquery-ui.min.js'
+            'bower/components/bootstrap/dist/js/bootstrap.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset( asset_url ) }}" charset='utf-8'></script>
+        {% endjavascripts %}
+
+        {% block javascripts %}{% endblock javascripts %}
+
     </body>
 </html>

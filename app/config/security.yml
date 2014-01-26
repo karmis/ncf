@@ -14,6 +14,9 @@ security:
         main:
             pattern: ^/
             form_login:
+                # login success redirecting options (read further below)
+                always_use_default_target_path: false
+                default_target_path:            nc_interface_index
                 # submit the login form here
                 check_path: fos_user_security_check
 
