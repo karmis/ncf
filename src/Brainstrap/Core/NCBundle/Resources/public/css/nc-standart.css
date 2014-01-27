@@ -1,0 +1,35 @@
+a {
+	color: #aaa;
+}
+a:hover {
+	color: #eee;
+}
+#top {
+	background: url(../images/backgrounds/top.jpg) repeat-x 0 0;
+	height: 48px;
+	display: block;
+	width: 100%;
+	position: absolute;
+	z-index: 10000;
+	border-bottom: 1px solid #1c1c1c;
+	top: -1px;
+}
+
+#top.nc-top-navbar {
+	border-radius: 0px !important;
+}
+
+#top.nc-top-navbar .nav>li>a:hover, .nav>li>a:focus {
+	text-decoration: none;
+	background-color: inherit;
+}
+
+#top.nc-top-navbar .navbar-text {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#mainNav .nav>li>a:hover, .nav>li>a:focus {
+	text-decoration: none;
+	background-color: inherit;
+}
