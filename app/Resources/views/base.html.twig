@@ -42,12 +42,18 @@
                 {% block breadLine %}{% endblock breadLine %}
                 {% block wrapper %}{% endblock wrapper %}
             {% endblock content %}
+
+            {% block modal %}
+                {% block modal_add_session_person %}{% endblock modal_add_session_person %}
+                {% block modal_add_session_group %}{% endblock modal_add_session_group %}
+            {% endblock modal %}
         {% endblock %}
 
         {% javascripts
             'bower/components/jquery/jquery.min.js'
             'bower/components/jquery-migrate/jquery-migrate.min.js'
             'bower/components/jquery-ui/ui/minified/jquery-ui.min.js'
+            'bower/components/bootstrap/dist/js/bootstrap.min.js'
 
             'bundles/brainstrapcorenc/js/plugins/ui/jquery.easytabs.min.js'
             'bundles/brainstrapcorenc/js/files/functions.js'

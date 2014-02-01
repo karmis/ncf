@@ -6,6 +6,7 @@
       "jquery": "jquery#latest",
       "jquery-migrate": "#latest",
       "jquery-ui": "jquery-ui#latest",
-      "fontawesome": "components-font-awesome#latest"
+      "fontawesome": "components-font-awesome#latest",
+      "jstorage": "#latest"
     }
 }

@@ -1,3 +1,7 @@
 nc_interface_index:
-    pattern:  /do
+    pattern:  /do/
     defaults: { _controller: BrainstrapCoreNCBundle:Default:index }
+
+nc_settings_index:
+    pattern:  /do/settings/
+    defaults: { _controller: BrainstrapCoreNCBundle:Settings:index }
