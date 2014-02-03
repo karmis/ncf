@@ -5,22 +5,19 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% stylesheets
-            'bower/components/jquery-ui/themes/base/minified/jquery-ui.min.css'
-            'bower/components/bootstrap/dist/css/bootstrap.min.css'
-            'bower/components/fontawesome/css/font-awesome.min.css'
-            
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/jquery-ui/themes/base/minified/jquery-ui.min.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/bootstrap/dist/css/bootstrap.min.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/fontawesome/css/font-awesome.min.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2/select2.css') }}" />
+            {# <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2/select2-bootstrap.css') }}" /> #}
+            {# <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2-bootstrap3-css/select2-bootstrap.css') }}" /> #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/brainstrapcorenc/css/tables/flexigrid.pack.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/brainstrapcorenc/css/styles.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/brainstrapcorenc/css/nc-standart.css') }}" />
+        
+       {% endblock stylesheets %}
 
-
-            'bundles/brainstrapcorenc/css/tables/flexigrid.pack.css'
-            'bundles/brainstrapcorenc/css/styles.css'
-            'bundles/brainstrapcorenc/css/nc-standart.css'
-
-        filter='cssrewrite' %}
-        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
-        {% endstylesheets %}
-
-        {% block stylesheets %}{% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -44,24 +41,23 @@
             {% endblock content %}
 
             {% block modal %}
+                {% block modal_request_cart %}{% endblock modal_request_cart %}
                 {% block modal_add_session_person %}{% endblock modal_add_session_person %}
                 {% block modal_add_session_group %}{% endblock modal_add_session_group %}
             {% endblock modal %}
         {% endblock %}
 
-        {% javascripts
-            'bower/components/jquery/jquery.min.js'
-            'bower/components/jquery-migrate/jquery-migrate.min.js'
-            'bower/components/jquery-ui/ui/minified/jquery-ui.min.js'
-            'bower/components/bootstrap/dist/js/bootstrap.min.js'
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bower/components/jquery/jquery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bower/components/jquery-migrate/jquery-migrate.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bower/components/jquery-ui/ui/minified/jquery-ui.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bower/components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-            'bundles/brainstrapcorenc/js/plugins/ui/jquery.easytabs.min.js'
-            'bundles/brainstrapcorenc/js/files/functions.js'
-        %}
-        <script type="text/javascript" src="{{ asset( asset_url ) }}" charset='utf-8'></script>
-        {% endjavascripts %}
+            <script type="text/javascript" src="{{ asset('bower/components/select2/select2.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bower/components/select2/select2_locale_ru.js') }}"></script>
 
-        {% block javascripts %}{% endblock javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/files/functions.js') }}"></script>
+        {% endblock javascripts %}
 
     </body>
 </html>

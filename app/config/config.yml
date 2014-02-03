@@ -80,3 +80,12 @@ iphp_file_store:
             namer:
                 propertyPrefix:
                     params: { use_field_name : true, delimiter: "_", field : "id" }
+
+avalanche_imagine:
+    filters:
+        avatar_user:
+            type:    thumbnail
+            options: { size: [70, 70], mode: outbound }
+
+genemu_form:
+    select2: ~

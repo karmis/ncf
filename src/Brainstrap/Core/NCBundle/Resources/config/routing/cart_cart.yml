@@ -1,0 +1,35 @@
+cart:
+    pattern:  /
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:index" }
+
+cart_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:show" }
+
+cart_new:
+    pattern:  /new
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:new" }
+
+cart_create:
+    pattern:  /create
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:create" }
+    requirements: { _method: post }
+
+cart_search:
+    pattern:  /search
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:search" }
+    requirements: { _method: post }
+
+cart_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:edit" }
+
+cart_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:update" }
+    requirements: { _method: post|put }
+
+cart_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BrainstrapCoreNCBundle:Cart\Cart:delete" }
+    requirements: { _method: post|delete }

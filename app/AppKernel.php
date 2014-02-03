@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Iphp\FileStoreBundle\IphpFileStoreBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Brainstrap\Core\NCBundle\BrainstrapCoreNCBundle(),
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Brainstrap\Core\NCUserBundle\BrainstrapCoreNCUserBundle(),
         );
 

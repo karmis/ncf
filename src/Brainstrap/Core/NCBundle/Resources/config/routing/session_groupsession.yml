@@ -1,0 +1,30 @@
+session_groupsession:
+    pattern:  /
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:index" }
+
+session_groupsession_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:show" }
+
+session_groupsession_new:
+    pattern:  /new
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:new" }
+
+session_groupsession_create:
+    pattern:  /create
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:create" }
+    requirements: { _method: post }
+
+session_groupsession_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:edit" }
+
+session_groupsession_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:update" }
+    requirements: { _method: post|put }
+
+session_groupsession_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BrainstrapCoreNCBundle:Session\GroupSession:delete" }
+    requirements: { _method: post|delete }

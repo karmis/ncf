@@ -21,7 +21,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
 
         "iphp/filestore-bundle":"dev-master",
-        "friendsofsymfony/user-bundle":"dev-master"
+        "friendsofsymfony/user-bundle":"dev-master",
+        "avalanche123/imagine-bundle": "v2.1",
+        "genemu/form-bundle": "2.2.*"
     },
     "scripts": {
         "post-install-cmd": [

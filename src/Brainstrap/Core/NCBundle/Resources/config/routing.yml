@@ -5,3 +5,24 @@ nc_interface_index:
 nc_settings_index:
     pattern:  /do/settings/
     defaults: { _controller: BrainstrapCoreNCBundle:Settings:index }
+
+BrainstrapCoreNCBundle_client:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing/client_client.yml"
+    prefix:   /client
+
+BrainstrapCoreNCBundle_cart:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing/cart_cart.yml"
+    prefix:   /cart
+
+BrainstrapCoreNCBundle_cart_type:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing/cart_carttype.yml"
+    prefix:   /cart/type
+
+BrainstrapCoreNCBundle_session_personalsession:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing/session_personalsession.yml"
+    prefix:   /session/personalsession
+
+BrainstrapCoreNCBundle_session_groupsession:
+    resource: "@BrainstrapCoreNCBundle/Resources/config/routing/session_groupsession.yml"
+    prefix:   /session/groupsession
+

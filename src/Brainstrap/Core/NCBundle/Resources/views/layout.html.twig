@@ -43,14 +43,22 @@
 {% block sidebar %}
 <div id="sidebar">
     {% block mainNav %}
+        {% set user = app.security.getToken().getUser() %}
         <div id="mainNav" class="mainNav">
             <div class="user">
                 <a title="" class="leftUserDrop">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/user.png')}}" alt="" />
-                    <span> <strong>3</strong>
+                    {% if user.username is defined %}
+                        <img src="{{ user.userAvatar.path | apply_filter('avatar_user')}}" />
+                    {% endif %}
+                    <span>
+                        <strong>3</strong>
                     </span>
                 </a>
-                <span>Eugene</span>
+                <span>
+                    {% if user.username is defined %}
+                        {{ user.username }}
+                    {% endif %}
+                </span>
                 <ul class="leftUser list-unstyled">
                     <li>
                         <a href="#" title="" class="sProfile">Мой профиль</a>
@@ -140,6 +148,12 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab-sec-0-sessions">
+                        <div class="text-center">
+                            <p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add-session-request-cart"> + </button>
+                            </p>
+                        </div>
+
                         <p>
                             <div class="text-center">
                                 <div class="btn-group">
@@ -155,6 +169,21 @@
 
                         </p>
 
+                        <p>
+                            <div class="text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                        Добавить клиента<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a data-toggle="modal" data-target="#modal-add-session-person"><span class="fa fa-user fa-2 pull-left"></span>Персона</a></li>
+                                        <li><a data-toggle="modal" data-target="#modal-add-session-group"><span class="fa fa-users fa-2 pull-left"></span>Группа</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </p>
+                        
                         <div class="divider">
                             <span></span>
                         </div>
@@ -560,42 +589,168 @@
     <!-- Main content ends -->{% endblock wrapper %}</div>
 {% endblock content %}
 
-{% block modal_add_session_person %}
-    <div class="modal fade" id="modal-add-session-person" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+{% block modal_request_cart %}
+    <div class="modal fade" id="modal-add-session-request-cart" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-request-cart-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Добавить сессию для персоны</h4>
+            <h4 class="modal-title" id="modal-add-session-request-cart-title">Введите номер карты</h4>
           </div>
           <div class="modal-body">
-            ...
+            {{ form_start(cartCodeForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-request-cart', 'role': 'form' } }) }}
+                
+                <div class="form-group">
+                    <label for="article" class="col-md-2 control-label">Номер:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(cartCodeForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(cartCodeForm.code) }}
+                        </div>
+                    </div>
+                </div>
+                
+                {{ form_rest(cartCodeForm) }}
+            {{ form_end(cartCodeForm) }}
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-success" bs-nc-action="search-req-cart">Найти</button>
           </div>
         </div>
       </div>
     </div>
-{% endblock modal_add_session_person %}
+{% endblock modal_request_cart %}
 
-{% block modal_add_session_group %}
-    <div class="modal fade" id="modal-add-session-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+{% block modal_add_client %}
+    <div class="modal fade" id="modal-add-client" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-client-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Добавить сессию для группы</h4>
+            <h4 class="modal-title" id="modal-add-client-title">Добавить клиента</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modal_add_client %}
+
+{% block modal_add_session %}
+    <div class="modal fade" id="modal-add-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-add-session-title">Добавить сессию</h4>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modal_add_session %}
+
+{# {% block modal_add_session_person %}
+    <div class="modal fade" id="modal-add-session-person" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-person-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-add-session-person-title">Добавить сессию для персоны</h4>
+          </div>
+          <div class="modal-body">
+            {{ form_start(personalSessionType, { 'attr': {'class': 'form-horizontal', 'id': 'form-create-product', 'role': 'form' } }) }}
+                
+                <div class="form-group">
+                    <label for="article" class="col-md-2 control-label">Клиент</label>
+                    <div class="col-md-10">
+                        {{ form_widget(personalSessionType.user, { 'attr': {'class': 'form-control-nc validate-user', 'placeholder': 'Выберите клиента'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(personalSessionType.user) }}
+                        </div>
+                    </div>
+                </div>
+                
+                {{ form_rest(personalSessionType) }}
+            {{ form_end(personalSessionType) }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modal_add_session_person %} #}
+
+{% block modal_add_session_group %}
+    <div class="modal fade" id="modal-add-session-group" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-group-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-add-session-group-title">Добавить сессию для группы</h4>
           </div>
           <div class="modal-body">
             ...
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
           </div>
         </div>
       </div>
     </div>
 {% endblock modal_add_session_group %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {# {{ form_stylesheet(personalSessionType) }} #}
+
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function()
+        {
+            // Request number cart
+            window.bs.nc.functions.submitAjaxForm(
+                    $("[bs-nc-action='search-req-cart']"),
+                    $("form#form-request-cart"),
+                    "{{ path('cart_search') }}", 
+                    {
+                        200: function(json){
+                            var entity = $.parseJSON(json.entity);
+                            // Show info about cart
+                            debugger;
+                            alert(entity.code);
+                        },
+                        404: function(json){
+                            alert(json.msg);
+                        },
+                        500: function(json){
+                            alert(json.msg);
+                        }
+
+                    }
+                );
+        });
+            
+            
+    </script>
+    {# {{ form_javascript(personalSessionType) }} #}
+{% endblock javascripts %}

@@ -20,6 +20,13 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="fio", type="string")
+     */
+    protected $fio;
+
+    /**
      * @Assert\File( maxSize="20M")
      * @FileStore\UploadableField(mapping="userAvatar")
      * @ORM\Column(type="array")
@@ -63,5 +70,28 @@ class User extends BaseUser
     public function getUserAvatar()
     {
         return $this->userAvatar;
+    }
+
+    /**
+     * Set fio
+     *
+     * @param string $fio
+     * @return User
+     */
+    public function setFio($fio)
+    {
+        $this->fio = $fio;
+
+        return $this;
+    }
+
+    /**
+     * Get fio
+     *
+     * @return string 
+     */
+    public function getFio()
+    {
+        return $this->fio;
     }
 }
