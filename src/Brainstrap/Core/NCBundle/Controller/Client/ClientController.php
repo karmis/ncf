@@ -4,6 +4,11 @@ namespace Brainstrap\Core\NCBundle\Controller\Client;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 use Brainstrap\Core\NCBundle\Entity\Client\Client;
 use Brainstrap\Core\NCBundle\Form\Client\ClientType;
@@ -35,22 +40,60 @@ class ClientController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Client();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        if($request->isXmlHttpRequest())
+        {
+            $entity = new Client();
+            $form = $this->createCreateForm($entity);
+            $form->handleRequest($request);
+            $serializer = $this->getSerializer();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('client_show', array('id' => $entity->getId())));
+            if ($form->isValid()) {
+                $cartId = $form['cart_id']->getData();
+                if(empty($cartId) || !is_numeric($cartId))
+                {
+                    $return = array("responseCode"=>500, "msg" => "Не удалось получить id карты клиента");
+                }
+                else
+                {
+                    $em = $this->getDoctrine()->getManager();
+                    $entityCart = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->find($cartId);
+                    if(!$entityCart)
+                    {
+                        $return = array("responseCode"=>500, "msg" => "Не удалось получить карту клиента с переданным id");
+                    }
+                    else
+                    {
+                        $entity->setCart($entityCart);
+                        
+                        $em->persist($entity);
+                        $em->flush();
+
+                        $entityJSON = $serializer->serialize($entity, 'json');
+                        $return = array("responseCode"=>200, "entity" => $entityJSON);
+                    }
+                }
+
+                // return $this->redirect($this->generateUrl('client_show', array('id' => $entity->getId())));
+            }
+            else
+            {
+                $return = array("responseCode"=>500, "msg" => "Не валидные данные");
+            }
+        }
+        else
+        {
+            $return=array("responseCode"=>500, "msg"=>"Для обработка доступны только асинхронные запросы");
         }
 
-        return $this->render('BrainstrapCoreNCBundle:Client/Client:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $return=json_encode($return);
+        
+        return new Response($return, 200, array('Content-Type'=>'application/json')); 
+
+            // return $this->render('BrainstrapCoreNCBundle:Client/Client:new.html.twig', array(
+            //     'entity' => $entity,
+            //     'form'   => $form->createView(),
+            // ));
     }
 
     /**
@@ -219,5 +262,17 @@ class ClientController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Created object serializer 
+     */ 
+    private function getSerializer()
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer;
     }
 }

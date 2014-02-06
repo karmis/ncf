@@ -43,7 +43,7 @@ class Client
     private $birthday;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Cart\Cart")
+     * @ORM\OneToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Cart\Cart")
      * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
      */
     private $cart;

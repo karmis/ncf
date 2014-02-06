@@ -34,6 +34,6 @@ class CartRequestCodeType extends AbstractType
      */
     public function getName()
     {
-        return 'brainstrap_core_ncbundle_cart_cart';
+        return 'brainstrap_core_ncbundle_cart_cart_code';
     }
 }

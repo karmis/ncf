@@ -42,22 +42,42 @@ class CartController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Cart();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        if($request->isXmlHttpRequest())
+        {
+            $entity = new Cart();
+            $form = $this->createCreateForm($entity);
+            $form->handleRequest($request);
+            // $serializer = $this->getSerializer();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('cart_show', array('id' => $entity->getId())));
+                // $entityJSON = $serializer->serialize($entity, 'json');
+                $return = array("responseCode"=>200, "id" => $entity->getId());
+            }
+            else
+            {
+                $formErrors = $this->getErrorsAsArray($form);
+                // die(print_r($formErrors));
+                $return = array("responseCode"=>500, "msg" => $formErrors);
+            }
+        }
+        else
+        {
+            $return=array("responseCode"=>500, "msg"=>"Для обработка доступны только асинхронные запросы");
         }
 
-        return $this->render('BrainstrapCoreNCBundle:Cart/Cart:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $return=json_encode($return);
+        
+        return new Response($return, 200, array('Content-Type'=>'application/json')); 
+
+
+        // return $this->render('BrainstrapCoreNCBundle:Cart/Cart:new.html.twig', array(
+        //     'entity' => $entity,
+        //     'form'   => $form->createView(),
+        // ));
     }
 
     /**
@@ -77,21 +97,6 @@ class CartController extends Controller
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
-    }
-
-    /**
-     * Displays a form to create a new Cart\Cart entity.
-     *
-     */
-    public function newAction()
-    {
-        $entity = new Cart();
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('BrainstrapCoreNCBundle:Cart/Cart:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
     }
 
     /**
@@ -213,6 +218,7 @@ class CartController extends Controller
 
     /**
      * Search by cart code
+     * TODO Сделать валидацию
      */
     public function searchAction(Request $request)
     {
@@ -226,13 +232,11 @@ class CartController extends Controller
             $entity = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->findCartByCode($code);
 
             if($entity){
-                $encoders = array(new XmlEncoder(), new JsonEncoder());
-                $normalizers = array(new GetSetMethodNormalizer());
-                $serializer = new Serializer($normalizers, $encoders);
+                $serializer = $this->getSerializer();
                 $entityJSON = $serializer->serialize($entity, 'json');
                 $return=array("responseCode"=>200, "entity" => $entityJSON);
             } else {
-                $return=array("responseCode"=>404, "msg"=>"Карта не найдена");
+                $return=array("responseCode"=>404, "msg"=>"Карта не найдена", "entity" => array("code" => $code));
             }
         }
         else
@@ -261,5 +265,31 @@ class CartController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Created object serializer 
+     */ 
+    private function getSerializer()
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer;
+    }
+
+    private function getErrorsAsArray($form)
+    {
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            $errors[] = $error->getMessage();
+        }
+        foreach ($form->all() as $key => $child) {
+            if ($err = $this->getErrorsAsArray($child)) {
+                $errors[$key] = $err;
+            }
+        }
+        return $errors;
     }
 }

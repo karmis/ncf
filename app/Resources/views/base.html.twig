@@ -41,7 +41,10 @@
             {% endblock content %}
 
             {% block modal %}
+                {% block modal_request_wait %}{% endblock modal_request_wait %}
                 {% block modal_request_cart %}{% endblock modal_request_cart %}
+                {% block modal_add_cart_with_client %}{% endblock modal_add_cart_with_client %}
+
                 {% block modal_add_session_person %}{% endblock modal_add_session_person %}
                 {% block modal_add_session_group %}{% endblock modal_add_session_group %}
             {% endblock modal %}

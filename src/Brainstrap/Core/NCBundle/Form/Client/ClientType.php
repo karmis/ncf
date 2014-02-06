@@ -8,7 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ClientType extends AbstractType
 {
-        /**
+    private $type;
+    public function __construct($type = "none")
+    {
+        $this->$type = $type;
+    }
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -18,8 +23,24 @@ class ClientType extends AbstractType
             ->add('name')
             ->add('sname')
             ->add('birthday')
-            ->add('cart')
+            ->add('cart_id', 'hidden', array(
+                                    'mapped' => false,
+                                ))
         ;
+
+        // if ($this->type == "fast_create") {
+
+        //     $builder
+                
+        //     ;
+        // } 
+
+        // if ($this->type !== "fast_create"){
+        //     $builder->add('cart')
+
+        //     ;
+        // }
+
     }
     
     /**

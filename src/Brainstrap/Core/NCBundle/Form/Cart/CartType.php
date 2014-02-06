@@ -15,12 +15,16 @@ class CartType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code')
+            ->add('code', null, array(
+                    'error_bubbling' => true,
+                ))
             ->add('keyword')
-            ->add('registrationDate')
-            ->add('expiresDate')
-            ->add('locked')
-            ->add('type')
+            // ->add('registrationDate')
+            // ->add('expiresDate')
+            // ->add('locked')
+            ->add('type', null, array(
+                    'empty_value' => false,
+                ))
         ;
     }
     

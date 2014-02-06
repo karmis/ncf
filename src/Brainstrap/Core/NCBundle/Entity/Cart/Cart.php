@@ -9,7 +9,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="cart")
  * @ORM\Entity(repositoryClass="Brainstrap\Core\NCBundle\Repository\Cart\CartRepository")
- * @UniqueEntity("code")
+ * @UniqueEntity(
+ *     fields={"code"},
+ *     errorPath="code",
+ *     message="Карта с таким кодом уже существует"
+ * )
  */
 class Cart
 {
@@ -52,7 +56,7 @@ class Cart
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expiresDate", type="datetime")
+     * @ORM\Column(name="expiresDate", type="datetime", nullable=true)
      */
     private $expiresDate;
 
@@ -62,6 +66,17 @@ class Cart
      * @ORM\Column(name="locked", type="boolean")
      */
     private $locked;
+
+    public function __construct()
+    {
+        $this->registrationDate = new \DateTime('now');
+        $this->locked = false; 
+    }
+
+    public function __toString()
+    {
+        return $this->code;
+    }
 
     /**
      * Get id

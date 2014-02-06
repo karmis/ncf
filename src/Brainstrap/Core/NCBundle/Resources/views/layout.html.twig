@@ -150,7 +150,7 @@
                     <div class="tab-pane fade in active" id="tab-sec-0-sessions">
                         <div class="text-center">
                             <p>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add-session-request-cart"> + </button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code"> + </button>
                             </p>
                         </div>
 
@@ -161,7 +161,7 @@
                                        Кнопка шлепка <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a data-toggle="modal" data-target="#modal-add-client"><span class="fa fa-user fa-2 pull-left"></span>+ Клиент</a></li>
+                                        <li><a data-toggle="modal" data-target="#modal-add-cart-with-client"><span class="fa fa-user fa-2 pull-left"></span>+ Клиент</a></li>
                                         <li><a data-toggle="modal" data-target="#modal-add-session-group"><span class="fa fa-users fa-2 pull-left"></span>+ Карта</a></li>
                                     </ul>
                                 </div>
@@ -169,7 +169,7 @@
 
                         </p>
 
-                        <p>
+{#                         <p>
                             <div class="text-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
 
-                        </p>
+                        </p> #}
                         
                         <div class="divider">
                             <span></span>
@@ -589,14 +589,14 @@
     <!-- Main content ends -->{% endblock wrapper %}</div>
 {% endblock content %}
 
-{# Запрашивает кол карты - OK #}
+{# 1) Запрашивает карту по коду - OK #}
 {% block modal_request_cart %}
-    <div class="modal fade" id="modal-add-session-request-cart" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-request-cart-title" aria-hidden="true">
+    <div class="modal fade" id="modal-request-cart-for-search-by-code" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-request-cart-for-search-by-code-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modal-add-session-request-cart-title">Введите номер карты</h4>
+            <h4 class="modal-title" id="modal-request-cart-for-search-by-code-title">Введите номер карты</h4>
           </div>
           <div class="modal-body">
             {{ form_start(cartCodeForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-request-cart', 'role': 'form' } }) }}
@@ -615,7 +615,7 @@
             {{ form_end(cartCodeForm) }}
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
             <button type="button" class="btn btn-success" bs-nc-action="search-req-cart">Найти</button>
           </div>
         </div>
@@ -623,12 +623,130 @@
     </div>
 {% endblock modal_request_cart %}
 
+{# 2) Запрашивает карту по коду - OK #}
+{% block modal_request_wait %}
+    <div class="modal fade" id="modal-request-wait" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+{#           <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-request-cart-title">Добавить клиента</h4>
+          </div> #}
+          <div class="modal-body">
+                Ждите...
+          </div>
+{#           <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div> #}
+        </div>
+      </div>
+    </div>
+{% endblock modal_request_wait %}
 
-{% block modal_add_client %}
 
-{% endblock modal_add_client %}
+{% block modal_add_cart_with_client %}
+    <div class="modal fade" id="modal-add-cart-with-client" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal-add-cart-with-client" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-add-cart-with-client-title">Создание нового клиента</h4>
+          </div>
+          <div class="modal-body">
 
-{% block modal_add_client %}
+            
+            {# Форма создания клиента #}
+            {{ form_start(clientForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-client', 'role': 'form' } }) }}
+                
+                <div class="form-group">
+                    <label for="article" class="col-md-2 control-label">Имя:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(clientForm.name, { 'attr': {'class': 'form-control validate-name', 'placeholder': 'Имя'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(clientForm.name) }}
+                        </div>
+                    </div>
+
+                    <label for="article" class="col-md-2 control-label">Фамилия:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(clientForm.sname, { 'attr': {'class': 'form-control validate-sname', 'placeholder': 'Фамилия'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(clientForm.sname) }}
+                        </div>
+                    </div>
+
+                    <label for="article" class="col-md-2 control-label">День рождения:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(clientForm.birthday, { 'attr': {'class': 'form-control validate-birthday', 'placeholder': 'День рождения'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(clientForm.birthday) }}
+                        </div>
+                    </div>
+
+                    <div style="display:none">
+                        <label for="article" class="col-md-2 control-label">Номер карты:</label>
+                        <div class="col-md-10">
+                            {{ form_widget(clientForm.cart_id, { 'attr': {'class': 'form-control validate-cart_id', 'placeholder': 'Номер карты'} }) }}
+                            <div class="inputErrors">
+                                {{ form_errors(clientForm.cart_id) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                {{ form_rest(clientForm) }}
+            {{ form_end(clientForm) }}
+            
+
+            <div class="clearfix"></div>
+            
+
+            {# Форма создания карты #}
+            {{ form_start(cartForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-cart', 'role': 'form' } }) }}
+                
+                <div class="form-group">
+                    <label for="article" class="col-md-2 control-label">Номер:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(cartForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(cartForm.code) }}
+                        </div>
+                    </div>
+
+                    <label for="article" class="col-md-2 control-label">Тип:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(cartForm.type, { 'attr': {'class': 'form-control validate-type', 'placeholder': 'Выберите тип карты'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(cartForm.type) }}
+                        </div>
+                    </div>
+
+                    <label for="article" class="col-md-2 control-label">Секретное слово:</label>
+                    <div class="col-md-10">
+                        {{ form_widget(cartForm.keyword, { 'attr': {'class': 'form-control validate-keyword', 'placeholder': 'Секретное слово'} }) }}
+                        <div class="inputErrors">
+                            {{ form_errors(cartForm.keyword) }}
+                        </div>
+                    </div>
+                </div>
+                
+                {{ form_rest(cartForm) }}
+            {{ form_end(cartForm) }}
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-success" bs-nc-action="add-cart-with-client">Создать клиента</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modal_add_cart_with_client %}
+
+
+{# {% block modal_add_client %}
     <div class="modal fade" id="modal-add-client" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-client-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -646,9 +764,9 @@
         </div>
       </div>
     </div>
-{% endblock modal_add_client %}
+{% endblock modal_add_client %} #}
 
-{% block modal_add_session %}
+{# {% block modal_add_session %}
     <div class="modal fade" id="modal-add-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -666,7 +784,7 @@
         </div>
       </div>
     </div>
-{% endblock modal_add_session %}
+{% endblock modal_add_session %} #}
 
 {# {% block modal_add_session_person %}
     <div class="modal fade" id="modal-add-session-person" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-person-title" aria-hidden="true">
@@ -701,7 +819,7 @@
     </div>
 {% endblock modal_add_session_person %} #}
 
-{% block modal_add_session_group %}
+{# {% block modal_add_session_group %}
     <div class="modal fade" id="modal-add-session-group" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-group-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -719,7 +837,7 @@
         </div>
       </div>
     </div>
-{% endblock modal_add_session_group %}
+{% endblock modal_add_session_group %} #}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -732,27 +850,91 @@
     <script type="text/javascript">
         $(function()
         {
-            // Request number cart
+            // Request for search bys number cart
             window.bs.nc.functions.submitAjaxForm(
-                    $("[bs-nc-action='search-req-cart']"),
-                    $("form#form-request-cart"),
-                    "{{ path('cart_search') }}", 
-                    {
-                        200: function(json){
-                            var entity = $.parseJSON(json.entity);
-                            // Show info about cart
-                            debugger;
-                            alert(entity.code);
-                        },
-                        404: function(json){
-                            alert(json.msg);
-                        },
-                        500: function(json){
-                            alert(json.msg);
-                        }
+                $("[bs-nc-action='search-req-cart']"),
+                $("form#form-request-cart"),
+                "{{ path('cart_search') }}", 
+                {
+                    before: function(){
+                        debugger;
+                        $("#modal-request-cart-for-search-by-code").modal('hide');
+                        // $("#modal-request-wait").modal("toggle");
+                    },
+                    200: function(json){
+                        var entity = $.parseJSON(json.entity);
+                        // Show info about cart
+                        debugger;
+                        alert(entity.code);
+                    },
+                    404: function(json){
+                        debugger;
 
+                        // Создаем нового клиента вместе с картой
+                        $('#modal-add-cart-with-client').modal('show');
+                        $('#brainstrap_core_ncbundle_cart_cart_code').val(json.entity.code);
+                        // $("#modal-request-wait").modal("toggle");
+                        // alert(json.msg);
+                    },
+                    500: function(json){
+                        alert(json.msg);
                     }
-                );
+
+                }
+            );
+
+            // Create cart and user
+            // create cart
+            window.bs.nc.functions.submitAjaxForm(
+                $("[bs-nc-action='add-cart-with-client']"),
+                $("form#form-add-cart-with-client-cart"),
+                "{{ path('cart_create') }}", 
+                {
+                    // before: function(){
+                    //     debugger;
+                    //     $("#modal-request-cart-for-search-by-code").modal('hide');
+                    //     // $("#modal-request-wait").modal("toggle");
+                    // },
+                    // Create user
+                    200: function(json){
+                        debugger;
+                        if(json.responseCode == 200) {
+
+                            $('#brainstrap_core_ncbundle_client_client_cart_id').val(json.id)
+                            window.bs.nc.functions.submitAjaxForm(
+                                null,
+                                $("form#form-add-cart-with-client-client"),
+                                "{{ path('client_create') }}",
+                                {
+                                    // Success create client with cart
+                                    200: function(json){
+                                        var entity = $.parseJSON(json.entity);
+                                        // Show info about cart
+                                        debugger;
+                                        alert("user with name" + entity.name + "successfully created");
+                                    },
+                                    after: function(){
+                                        alert('Success');
+                                    }
+                                }
+                            );
+                        }
+                    },
+                    404: function(json){
+                        debugger;
+
+                        // Создаем нового клиента вместе с картой
+                        $('#modal-add-cart-with-client').modal('show');
+                        $('#brainstrap_core_ncbundle_cart_cart_code').val(json.entity.code);
+                        // $("#modal-request-wait").modal("toggle");
+                        // alert(json.msg);
+                    },
+                    500: function(json){
+                        alert(json.msg);
+                    }
+
+                }
+            );
         });
             
             
