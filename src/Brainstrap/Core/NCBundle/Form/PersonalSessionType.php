@@ -1,5 +1,5 @@
 <?php
-namespace Brainstrap\Core\NCBundle\Form;
+namespace Brainstrap\Core\NCBundle\Form\Session;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,10 +12,9 @@ class PersonalSessionType extends AbstractType
     {
         $builder
 
-        ->add('cart', 'genemu_jqueryselect2_entity', array(
-            'class' => 'Brainstrap\Core\NCUserBundle\Entity\User',
-            'property' => 'fio',
-        )) 
+        ->add('cart_id', 'hidden', array(
+                                'mapped' => false,
+                            ))
         ;
     }
 

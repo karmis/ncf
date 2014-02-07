@@ -15,8 +15,13 @@ class PersonalSessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cart')
-            ->add('client')
+        
+            ->add('cart_id', 'hidden', array(
+                                'mapped' => false,
+                            ))
+            ->add('client_id', 'hidden', array(
+                                'mapped' => false,
+                            ))
         ;
     }
     

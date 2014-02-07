@@ -19,9 +19,6 @@ class CartType extends AbstractType
                     'error_bubbling' => true,
                 ))
             ->add('keyword')
-            // ->add('registrationDate')
-            // ->add('expiresDate')
-            // ->add('locked')
             ->add('type', null, array(
                     'empty_value' => false,
                 ))

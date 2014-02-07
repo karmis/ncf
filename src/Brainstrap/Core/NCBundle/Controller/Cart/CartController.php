@@ -229,12 +229,22 @@ class CartController extends Controller
 
             $code = $form->getData()->getCode();
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->findCartByCode($code);
+            $entityCart = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->findCartByCartCode($code);
 
-            if($entity){
-                $serializer = $this->getSerializer();
-                $entityJSON = $serializer->serialize($entity, 'json');
-                $return=array("responseCode"=>200, "entity" => $entityJSON);
+            if($entityCart){
+                $entityClient = $em->getRepository('BrainstrapCoreNCBundle:Client\Client')->findClientByCartCode($code);
+                if($entityClient)
+                {
+                    $serializer = $this->getSerializer();
+                    $entityCartJSON = $serializer->serialize($entityCart, 'json');
+                    $entityClientJSON = $serializer->serialize($entityClient, 'json');
+                    
+                    $return=array("responseCode"=>200, "entityCart" => $entityCartJSON, "entityClient" => $entityClientJSON);
+                }
+                else
+                {
+                    $return=array("responseCode"=>404, "msg"=>"Клиент с таким номером карты не найден", "entity" => array("code" => $code));
+                }
             } else {
                 $return=array("responseCode"=>404, "msg"=>"Карта не найдена", "entity" => array("code" => $code));
             }

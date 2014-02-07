@@ -176,7 +176,7 @@
                                         Добавить клиента<span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a data-toggle="modal" data-target="#modal-add-session-person"><span class="fa fa-user fa-2 pull-left"></span>Персона</a></li>
+                                        <li><a data-toggle="modal" data-target="#modal-add-session"><span class="fa fa-user fa-2 pull-left"></span>Персона</a></li>
                                         <li><a data-toggle="modal" data-target="#modal-add-session-group"><span class="fa fa-users fa-2 pull-left"></span>Группа</a></li>
                                     </ul>
                                 </div>
@@ -659,6 +659,8 @@
             {# Форма создания клиента #}
             {{ form_start(clientForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-client', 'role': 'form' } }) }}
                 
+                {{ form_widget(clientForm.cart_id) }}
+                
                 <div class="form-group">
                     <label for="article" class="col-md-2 control-label">Имя:</label>
                     <div class="col-md-10">
@@ -667,7 +669,9 @@
                             {{ form_errors(clientForm.name) }}
                         </div>
                     </div>
+                </div>
 
+                <div class="form-group">
                     <label for="article" class="col-md-2 control-label">Фамилия:</label>
                     <div class="col-md-10">
                         {{ form_widget(clientForm.sname, { 'attr': {'class': 'form-control validate-sname', 'placeholder': 'Фамилия'} }) }}
@@ -675,7 +679,9 @@
                             {{ form_errors(clientForm.sname) }}
                         </div>
                     </div>
+                </div>
 
+                <div class="form-group">
                     <label for="article" class="col-md-2 control-label">День рождения:</label>
                     <div class="col-md-10">
                         {{ form_widget(clientForm.birthday, { 'attr': {'class': 'form-control validate-birthday', 'placeholder': 'День рождения'} }) }}
@@ -683,17 +689,6 @@
                             {{ form_errors(clientForm.birthday) }}
                         </div>
                     </div>
-
-                    <div style="display:none">
-                        <label for="article" class="col-md-2 control-label">Номер карты:</label>
-                        <div class="col-md-10">
-                            {{ form_widget(clientForm.cart_id, { 'attr': {'class': 'form-control validate-cart_id', 'placeholder': 'Номер карты'} }) }}
-                            <div class="inputErrors">
-                                {{ form_errors(clientForm.cart_id) }}
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 
                 {{ form_rest(clientForm) }}
@@ -705,25 +700,30 @@
 
             {# Форма создания карты #}
             {{ form_start(cartForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-cart', 'role': 'form' } }) }}
-                
+
+
                 <div class="form-group">
-                    <label for="article" class="col-md-2 control-label">Номер:</label>
+                    <label class="col-md-2 control-label">Номер:</label>
                     <div class="col-md-10">
                         {{ form_widget(cartForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты'} }) }}
                         <div class="inputErrors">
                             {{ form_errors(cartForm.code) }}
                         </div>
                     </div>
+                </div>
 
-                    <label for="article" class="col-md-2 control-label">Тип:</label>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Тип:</label>
                     <div class="col-md-10">
                         {{ form_widget(cartForm.type, { 'attr': {'class': 'form-control validate-type', 'placeholder': 'Выберите тип карты'} }) }}
                         <div class="inputErrors">
                             {{ form_errors(cartForm.type) }}
                         </div>
                     </div>
+                </div>
 
-                    <label for="article" class="col-md-2 control-label">Секретное слово:</label>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Секретное слово:</label>
                     <div class="col-md-10">
                         {{ form_widget(cartForm.keyword, { 'attr': {'class': 'form-control validate-keyword', 'placeholder': 'Секретное слово'} }) }}
                         <div class="inputErrors">
@@ -786,29 +786,103 @@
     </div>
 {% endblock modal_add_session %} #}
 
-{# {% block modal_add_session_person %}
-    <div class="modal fade" id="modal-add-session-person" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-person-title" aria-hidden="true">
+{% block modal_add_session %}
+    <div class="modal fade" id="modal-add-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-title" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modal-add-session-person-title">Добавить сессию для персоны</h4>
+            <h4 class="modal-title" id="modal-add-session-title">Добавить сессию</h4>
           </div>
           <div class="modal-body">
-            {{ form_start(personalSessionType, { 'attr': {'class': 'form-horizontal', 'id': 'form-create-product', 'role': 'form' } }) }}
-                
-                <div class="form-group">
-                    <label for="article" class="col-md-2 control-label">Клиент</label>
-                    <div class="col-md-10">
-                        {{ form_widget(personalSessionType.user, { 'attr': {'class': 'form-control-nc validate-user', 'placeholder': 'Выберите клиента'} }) }}
-                        <div class="inputErrors">
-                            {{ form_errors(personalSessionType.user) }}
-                        </div>
+            {# Personal session #}
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab-modal-personal-session" data-toggle="tab"><span class="fa fa-user fa-2"></span></a></li>
+              <li><a href="#tab-modal-group-session" data-toggle="tab"><span class="fa fa-users fa-2"></span></a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab-modal-personal-session">
+                    <div class="">
+                        <p>
+                            {{ form_start(personalSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-modal-add-personal-session', 'role': 'form' } }) }}
+                                {{ form_widget(personalSessionForm.cart_id) }}
+                                {{ form_widget(personalSessionForm.client_id) }}
+                                <h2> Сессия для персоны </h2>
+                                  <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <div class="checkbox">
+                                        <label>
+                                          <input type="checkbox"> Remember me
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button type="submit" class="btn btn-default">Sign in</button>
+                                    </div>
+                                  </div>
+
+                                {{ form_rest(personalSessionForm) }}
+                            {{ form_end(personalSessionForm) }}
+                            {# <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code"> + </button> #}
+                        </p>
                     </div>
                 </div>
-                
-                {{ form_rest(personalSessionType) }}
-            {{ form_end(personalSessionType) }}
+
+                <div class="tab-pane fade" id="tab-modal-group-session">
+                    <div class="">
+                        <p>
+                            {{ form_start(groupSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-modal-add-group-session', 'role': 'form' } }) }}
+                                {{ form_widget(groupSessionForm.cart_id) }}
+                                {{ form_widget(personalSessionForm.client_id) }}
+                                <h2> Сессия для группы </h2>
+                                  <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <div class="checkbox">
+                                        <label>
+                                          <input type="checkbox"> Remember me
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button type="submit" class="btn btn-default">Sign in</button>
+                                    </div>
+                                  </div>
+                                {{ form_rest(groupSessionForm) }}
+                            {{ form_end(groupSessionForm) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -817,7 +891,7 @@
         </div>
       </div>
     </div>
-{% endblock modal_add_session_person %} #}
+{% endblock modal_add_session %}
 
 {# {% block modal_add_session_group %}
     <div class="modal fade" id="modal-add-session-group" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-group-title" aria-hidden="true">
@@ -861,11 +935,34 @@
                         $("#modal-request-cart-for-search-by-code").modal('hide');
                         // $("#modal-request-wait").modal("toggle");
                     },
+                    // Add Session
                     200: function(json){
-                        var entity = $.parseJSON(json.entity);
-                        // Show info about cart
                         debugger;
-                        alert(entity.code);
+                        var entityCart      = $.parseJSON(json.entityCart);
+                        var entityClient    = $.parseJSON(json.entityClient);
+                        
+                        $("#modal-add-session").modal('show');
+                        $("#brainstrap_core_ncbundle_session_personalsession_cart_id").val(entityCart.id);
+                        $("#brainstrap_core_ncbundle_session_groupsession_cart_id").val(entityCart.id);
+                        
+                        window.bs.nc.functions.submitAjaxForm(
+                            "null",
+                            $("form#form-modal-add-session"),
+                            "{{ path('session_personalsession_create') }}",
+                            {
+                                // Create session
+                                200: function(json){
+                                    var entity = $.parseJSON(json.entity);
+                                    // Show info about cart
+                                    debugger;
+                                    alert("user with name" + entity.name + "successfully created");
+                                },
+                                after: function(){
+                                    alert('Success');
+                                }
+                            }
+                        );
+
                     },
                     404: function(json){
                         debugger;
@@ -883,7 +980,7 @@
                 }
             );
 
-            // Create cart and user
+            // Create cart and user and session
             // create cart
             window.bs.nc.functions.submitAjaxForm(
                 $("[bs-nc-action='add-cart-with-client']"),
@@ -906,7 +1003,7 @@
                                 $("form#form-add-cart-with-client-client"),
                                 "{{ path('client_create') }}",
                                 {
-                                    // Success create client with cart
+                                    // Create session
                                     200: function(json){
                                         var entity = $.parseJSON(json.entity);
                                         // Show info about cart
