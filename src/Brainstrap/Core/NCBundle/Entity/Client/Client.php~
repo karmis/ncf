@@ -48,6 +48,11 @@ class Client
      */
     private $cart;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get id
      *

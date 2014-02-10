@@ -73,3 +73,7 @@ a:hover {
 	-webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
 	box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
 }
+
+.form-horizontal .control-label-without-input {
+	padding-top: 0px;
+}

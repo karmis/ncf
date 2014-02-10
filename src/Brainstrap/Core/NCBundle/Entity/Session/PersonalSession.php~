@@ -28,10 +28,26 @@ class PersonalSession
     private $cart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Client\Client")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * Тип карты для текущей сессии
+     * 
+     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Cart\CartType")
+     * @ORM\JoinColumn(name="cart_type_id", referencedColumnName="id")
      */
-    private $client;
+    private $type;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="startDate", type="datetime")
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endDate", type="datetime")
+     */
+    private $endDate;
 
     /**
      * Get id
@@ -41,6 +57,52 @@ class PersonalSession
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set startDate
+     *
+     * @param \DateTime $startDate
+     * @return PersonalSession
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return PersonalSession
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime 
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 
     /**
@@ -67,25 +129,25 @@ class PersonalSession
     }
 
     /**
-     * Set client
+     * Set type
      *
-     * @param \Brainstrap\Core\NCBundle\Entity\Client\Client $client
+     * @param \Brainstrap\Core\NCBundle\Entity\Cart\CartType $type
      * @return PersonalSession
      */
-    public function setClient(\Brainstrap\Core\NCBundle\Entity\Client\Client $client = null)
+    public function setType(\Brainstrap\Core\NCBundle\Entity\Cart\CartType $type = null)
     {
-        $this->client = $client;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get client
+     * Get type
      *
-     * @return \Brainstrap\Core\NCBundle\Entity\Client\Client 
+     * @return \Brainstrap\Core\NCBundle\Entity\Cart\CartType 
      */
-    public function getClient()
+    public function getType()
     {
-        return $this->client;
+        return $this->type;
     }
 }

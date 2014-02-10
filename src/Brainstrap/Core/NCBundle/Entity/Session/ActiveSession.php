@@ -4,13 +4,15 @@ namespace Brainstrap\Core\NCBundle\Entity\Session;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Session
- * Набор идентификаторов позволяющий работать с разными типами сессий
- * 
- * @ORM\Table(name="sessions_active")
- * @ORM\Entity(repositoryClass="Brainstrap\Core\NCBundle\Repository\Session\SessionRepository")
- */
+// *
+//  * Session
+//  * Набор идентификаторов позволяющий работать с разными типами сессий
+//  * 
+//  * @ORM\Table(name="sessions_active")
+//  * 
+//  * 
+ 
+ // @ORM\Entity(repositoryClass="Brainstrap\Core\NCBundle\Repository\Session\SessionRepository")
 class ActiveSession
 {
     /**

@@ -4,6 +4,11 @@ namespace Brainstrap\Core\NCBundle\Controller\Session;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 use Brainstrap\Core\NCBundle\Entity\Session\PersonalSession;
 use Brainstrap\Core\NCBundle\Form\Session\PersonalSessionType;
@@ -35,22 +40,63 @@ class PersonalSessionController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new PersonalSession();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        if($request->isXmlHttpRequest())
+        {
+            $entity = new PersonalSession();
+            $form = $this->createCreateForm($entity);
+            $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            if ($form->isValid())
+            {
+                $clientId = $form->get('client_id')->getData();
+                $cartId = $form->get('cart_id')->getData();
+                // $entitySession = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($cartId);
+                if (!empty($clientId) && !empty($cartId))
+                {
+                    $em = $this->getDoctrine()->getManager();
+                    // die($cartId . " __");
+                    $entityCartClient = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->find($cartId);
+                    // $entityClient = $em->getRepository('BrainstrapCoreNCBundle:Client\Client')->findClientByCartClientId($clientId, $cartId);
+                    
 
-            return $this->redirect($this->generateUrl('session_personalsession_show', array('id' => $entity->getId())));
+                    if(!empty($entityCartClient))
+                    {
+                        $entity->setCart($entityCartClient);
+                        // $entity->setClient($entityCartClient->getClient());
+
+                        $em->persist($entity);
+                        $em->flush();
+
+                        $return = array("responseCode"=>200, "id" => $entity->getId());
+                    }
+                    else
+                    {
+                        $return = array("responseCode"=>500, "msg" => "Не удалось создать сессию из-за несуществующих данных");
+                    }
+                }
+                else
+                {
+                    $return = array("responseCode"=>500, "msg" => "Не удалось создать сессию из-за несуществующих запрашиваемых данных");
+                }
+            }
+            else
+            {
+                $formErrors = $this->getErrorsAsArray($form);
+                $return = array("responseCode"=>500, "msg" => $formErrors);
+            }
+        }
+        else
+        {
+            $return=array("responseCode"=>500, "msg"=>"Для обработка доступны только асинхронные запросы");
         }
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $return=json_encode($return);
+        
+        return new Response($return, 200, array('Content-Type'=>'application/json'));         
+        // return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:new.html.twig', array(
+        //     'entity' => $entity,
+        //     'form'   => $form->createView(),
+        // ));
     }
 
     /**
@@ -219,5 +265,19 @@ class PersonalSessionController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    private function getErrorsAsArray($form)
+    {
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            $errors[] = $error->getMessage();
+        }
+        foreach ($form->all() as $key => $child) {
+            if ($err = $this->getErrorsAsArray($child)) {
+                $errors[$key] = $err;
+            }
+        }
+        return $errors;
     }
 }

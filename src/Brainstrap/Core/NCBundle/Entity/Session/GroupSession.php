@@ -4,12 +4,13 @@ namespace Brainstrap\Core\NCBundle\Entity\Session;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * GroupSession
- *
- * @ORM\Table(name="sessions_groups")
- * @ORM\Entity(repositoryClass="Brainstrap\Core\NCBundle\Repository\Session\GroupSessionRepository")
- */
+// *
+//  * GroupSession
+//  *
+//  * @ORM\Table(name="sessions_groups")
+//  * 
+ 
+// @ORM\Entity(repositoryClass="Brainstrap\Core\NCBundle\Repository\Session\GroupSessionRepository")
 class GroupSession
 {
     /**

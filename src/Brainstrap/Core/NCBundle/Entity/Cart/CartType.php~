@@ -28,6 +28,11 @@ class CartType
      */
     private $caption;
 
+    public function __toString()
+    {
+        return $this->caption;
+    }
+
     /**
      * Get id
      *

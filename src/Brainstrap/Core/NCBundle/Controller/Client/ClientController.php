@@ -64,13 +64,34 @@ class ClientController extends Controller
                     }
                     else
                     {
+                        // Add cart to client
                         $entity->setCart($entityCart);
-                        
                         $em->persist($entity);
+                        
+                        // Add client to cart
+                        $entityCart->setClient($entity);
+                        $em->persist($entityCart);
+                        
                         $em->flush();
 
-                        $entityJSON = $serializer->serialize($entity, 'json');
-                        $return = array("responseCode"=>200, "entity" => $entityJSON);
+
+                        $ans = array(
+                                // Client
+                                'clientId'      => $entity->getId(),
+                                'clientName'    => $entity->getName(),
+                                'clientSname'   => $entity->getSname(),
+                                // Cart
+                                'cartId'        => $entityCart->getId(),
+                                'cartCode'      => $entityCart->getCode(),
+                                
+                                
+                            );
+                        $ans = json_encode($ans);
+                        // die('plplpl');
+
+                        // $clientName = $serializer->serialize($entity->getName(), 'json');
+                        // $clientSName = $serializer->serialize($entity->getSName(), 'json');
+                        $return = array("responseCode"=>200, "entity" => $ans);
                     }
                 }
 

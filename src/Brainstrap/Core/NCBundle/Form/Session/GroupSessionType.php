@@ -18,6 +18,9 @@ class GroupSessionType extends AbstractType
         ->add('client_id', 'hidden', array(
                             'mapped' => false,
                         ))
+        ->add('type_id', 'hidden', array(
+                            'mapped' => false,
+                        ))
         ;
     }
 

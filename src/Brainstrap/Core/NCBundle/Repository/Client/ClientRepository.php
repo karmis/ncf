@@ -11,12 +11,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClientRepository extends EntityRepository
 {
+	/**
+	 * Find client by cart code
+	 */
 	public function findClientByCartCode($code)
 	{
 		$query = $this->createQueryBuilder('client')
 			->innerJoin("client.cart", "cart")
 			->where('cart.code = :code')
 			->setParameter('code', $code)
+			->getQuery();
+
+		return $query->getOneOrNullResult();
+	}
+
+	/**
+	 * Find client by cart id and client id
+	 */
+	public function findClientByCartClientId($clientId, $codeId)
+	{
+		$query = $this->createQueryBuilder('client')
+			->innerJoin("client.cart", "cart")
+			->where('cart.id = :codeId')
+			->andWhere('client.id = :clientId')
+			->setParameter('codeId', $codeId)
+			->setParameter('clientId', $clientId)
 			->getQuery();
 
 		return $query->getOneOrNullResult();

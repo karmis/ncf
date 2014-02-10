@@ -47,6 +47,12 @@ class Cart
     private $type;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Client\Client")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="registrationDate", type="datetime")
@@ -224,5 +230,28 @@ class Cart
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \Brainstrap\Core\NCBundle\Entity\Client\Client $client
+     * @return Cart
+     */
+    public function setClient(\Brainstrap\Core\NCBundle\Entity\Client\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \Brainstrap\Core\NCBundle\Entity\Client\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }

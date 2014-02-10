@@ -49,7 +49,9 @@ class CartController extends Controller
             $form->handleRequest($request);
             // $serializer = $this->getSerializer();
 
-            if ($form->isValid()) {
+            if ($form->isValid())
+            {
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($entity);
                 $em->flush();

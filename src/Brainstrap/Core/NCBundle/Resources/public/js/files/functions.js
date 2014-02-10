@@ -6,7 +6,7 @@ window.bs.nc.functions = {};
 window.bs.nc.paths = {};
 
 // User nav dropdown
-window.bs.nc.functions.userNavDropDown= function()
+window.bs.nc.functions.userNavDropDown = function()
 {
 	$('a.leftUserDrop').click(function () {
 		$('.leftUser').slideToggle(200);
@@ -18,6 +18,13 @@ window.bs.nc.functions.userNavDropDown= function()
 	});	
 }
 
+// Get variable with route from twig-templater
+window.bs.nc.functions.getVarFromTpl = function(obj)
+{
+	window.bs.nc.paths = obj;
+}
+
+// Submit ajax form
 window.bs.nc.functions.submitAjaxForm = function(btnSelector, formSelector, path, callbacks)
 {
 	if(btnSelector === null){
@@ -33,6 +40,15 @@ window.bs.nc.functions.submitAjaxForm = function(btnSelector, formSelector, path
 	return false;
 }
 
+window.bs.nc.functions.fillHtmlFromEntity = function(form, entity)
+{
+	$.each(entity, function(key, val){
+		form.find("[nc-field='"+key+"']").html(val)
+	});
+
+}
+
+// Submit ajax form send
 window.bs.nc.functions._sendAjaxForm = function(formSelector, path, callbacks)
 {
 	    $.ajax({
@@ -82,7 +98,6 @@ window.bs.nc.functions._sendAjaxForm = function(formSelector, path, callbacks)
 	      //   }
 	    });
 }
-	
 
 $(function() {
 	window.bs.nc.functions.userNavDropDown();
