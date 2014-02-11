@@ -1,0 +1,97 @@
+<div class="modal fade" id="modal-add-cart-with-client" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal-add-cart-with-client" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-add-cart-with-client-title">Создание нового клиента</h4>
+      </div>
+      <div class="modal-body">
+
+        
+        {# Форма создания клиента #}
+        {{ form_start(clientForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-client', 'role': 'form' } }) }}
+            
+            {{ form_widget(clientForm.cart_id) }}
+            
+            <div class="form-group">
+                <label for="article" class="col-md-2 control-label">Имя:</label>
+                <div class="col-md-10">
+                    {{ form_widget(clientForm.name, { 'attr': {'class': 'form-control validate-name', 'placeholder': 'Имя'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(clientForm.name) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="article" class="col-md-2 control-label">Фамилия:</label>
+                <div class="col-md-10">
+                    {{ form_widget(clientForm.sname, { 'attr': {'class': 'form-control validate-sname', 'placeholder': 'Фамилия'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(clientForm.sname) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="article" class="col-md-2 control-label">День рождения:</label>
+                <div class="col-md-10">
+                    {{ form_widget(clientForm.birthday, { 'attr': {'class': 'form-control validate-birthday', 'placeholder': 'День рождения'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(clientForm.birthday) }}
+                    </div>
+                </div>
+            </div>
+            
+            {{ form_rest(clientForm) }}
+        {{ form_end(clientForm) }}
+        
+
+        <div class="clearfix"></div>
+        
+
+        {# Форма создания карты #}
+        {{ form_start(cartForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-cart', 'role': 'form' } }) }}
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Номер:</label>
+                <div class="col-md-10">
+                    {{ form_widget(cartForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты', 'readonly':'readonly'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(cartForm.code) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Тип:</label>
+                <div class="col-md-10">
+                    {{ form_widget(cartForm.type, { 'attr': {'class': 'form-control validate-type', 'placeholder': 'Выберите тип карты'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(cartForm.type) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Секретное слово:</label>
+                <div class="col-md-10">
+                    {{ form_widget(cartForm.keyword, { 'attr': {'class': 'form-control validate-keyword', 'placeholder': 'Секретное слово'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(cartForm.keyword) }}
+                    </div>
+                </div>
+            </div>
+            
+            {{ form_rest(cartForm) }}
+        {{ form_end(cartForm) }}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-success btn-send-req" data-loading-text="Ждите..." bs-nc-action="add-cart-with-client">Создать клиента</button>
+      </div>
+    </div>
+  </div>
+</div>

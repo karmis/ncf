@@ -1,0 +1,30 @@
+<div class="modal fade" id="modal-request-cart-for-search-by-code" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-request-cart-for-search-by-code-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-request-cart-for-search-by-code-title">Введите номер карты</h4>
+      </div>
+      <div class="modal-body">
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'form-request-cart', 'role': 'form' } }) }}
+            
+            <div class="form-group">
+                <label for="article" class="col-md-2 control-label">Номер:</label>
+                <div class="col-md-10">
+                    {{ form_widget(form.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(form.code) }}
+                    </div>
+                </div>
+            </div>
+            
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-success" bs-nc-action="search-req-cart">Найти</button>
+      </div>
+    </div>
+  </div>
+</div>

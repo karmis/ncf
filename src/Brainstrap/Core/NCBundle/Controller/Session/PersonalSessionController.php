@@ -50,19 +50,25 @@ class PersonalSessionController extends Controller
             {
                 $clientId = $form->get('client_id')->getData();
                 $cartId = $form->get('cart_id')->getData();
+
                 // $entitySession = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($cartId);
                 if (!empty($clientId) && !empty($cartId))
                 {
                     $em = $this->getDoctrine()->getManager();
                     // die($cartId . " __");
-                    $entityCartClient = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->find($cartId);
+                    $entityCart = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->find($cartId);
                     // $entityClient = $em->getRepository('BrainstrapCoreNCBundle:Client\Client')->findClientByCartClientId($clientId, $cartId);
                     
-
-                    if(!empty($entityCartClient))
+                    // die(print_r());
+                    if(!empty($entityCart))
                     {
-                        $entity->setCart($entityCartClient);
-                        // $entity->setClient($entityCartClient->getClient());
+
+                        // Расскоментировать когда решится вопрос с подменой типа сессии
+                        // $tmpCartType = $form->getData()->getType();
+                        // $type = !empty($tmpCartType)?$tmpCartType:$entityCart->getType();
+                        // $entity->setType($type);
+                        
+                        $entity->setCart($entityCart);
 
                         $em->persist($entity);
                         $em->flush();

@@ -1,0 +1,48 @@
+    <div class="modal fade" id="modal-client-info" data-backdrop="static" tabindex="-1" aria-labelledby="modal-client-info-title" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modal-client-info-title">Информация о клиенте</h4>
+          </div>
+          <div class="modal-body">
+            <div bs-nc-type='html-not-persist-form'>
+                <input type="hidden" nc-type='field' nc-field="clientId" readonly="readonly" />
+                <input type="hidden" nc-type='field' nc-field="cartId" readonly="readonly" />
+                <h3> Клиент </h3>
+                <div class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label-without-input">Имя: </label>
+                    <div class="col-sm-10">
+                      <span nc-type='field' nc-field="clientName"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label-without-input">Фамилия: </label>
+                    <div class="col-sm-10">
+                      <span nc-type='field' nc-field="clientSname"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <h3> Карта </h3>
+                <div class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label-without-input">Код: </label>
+                    <div class="col-sm-10">
+                      <span nc-type='field' nc-field="cartCode"></span>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" bs-nc-action="btn-modal-call-window-for-create-personal-session" class="btn btn-success btn-send-req" data-loading-text="Ждите...">Создать сессию для клиента</button>
+          </div>
+        </div>
+      </div>
+    </div>

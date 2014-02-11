@@ -1,26 +1,12 @@
 window.bs = {
-	nc: {
-		core: {
-			functions: {
-				main: {},
-				interfaces: {},
-				wizards: {}
-			},
-			paths: {}
-		}
-	}
+	nc: {}
 }
 
-
-/* Init */
-window.bs.nc.core.functions.main.init = function(paths)
-{
-	window.bs.nc.core.paths = paths;
-
-}
+window.bs.nc.functions = {};
+window.bs.nc.paths = {};
 
 // User nav dropdown
-window.bs.nc.core.functions.interfaces.userNavDropDown = function()
+window.bs.nc.functions.userNavDropDown = function()
 {
 	$('a.leftUserDrop').click(function () {
 		$('.leftUser').slideToggle(200);
@@ -114,7 +100,7 @@ window.bs.nc.functions._sendAjaxForm = function(formSelector, path, callbacks)
 }
 
 $(function() {
-	window.bs.nc.core.functions.interfaces.userNavDropDown()
+	window.bs.nc.functions.userNavDropDown();
 });
 
 	
