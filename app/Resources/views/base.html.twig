@@ -9,7 +9,6 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/jquery-ui/themes/base/minified/jquery-ui.min.css') }}" />
             <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/bootstrap/dist/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/fontawesome/css/font-awesome.min.css') }}" />
-            <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2/select2.css') }}" />
             {# <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2/select2-bootstrap.css') }}" /> #}
             {# <link rel="stylesheet" type="text/css" href="{{ asset('bower/components/select2-bootstrap3-css/select2-bootstrap.css') }}" /> #}
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/brainstrapcorenc/css/tables/flexigrid.pack.css') }}" />
@@ -51,6 +50,8 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bower/components/json2/json2.js') }}"></script>
+            
             <script type="text/javascript" src="{{ asset('bower/components/jquery/jquery.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bower/components/jquery-migrate/jquery-migrate.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bower/components/jquery-ui/ui/minified/jquery-ui.min.js') }}"></script>
@@ -59,9 +60,17 @@
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/configs/const.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/commons/commons.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/commons/submit.js') }}"></script>
+            
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/listeners.js') }}"></script>
+            
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/cartController.js') }}"></script>
             
+            {# CronJS #}
+            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/libs/cron.js-master/build/cron.cc.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/cron/cron.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/cron/jobs/test/testJob.js') }}"></script>
+            
+
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/init.js') }}"></script>
             
         {% endblock javascripts %}

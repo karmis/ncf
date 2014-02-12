@@ -5,7 +5,12 @@ window.bs = {
             paths: {},
             controllers: {},
             listeners: {},
-            commons: {}
+            commons: {},
+            cron: {
+            	crontab:{},
+            	cronjob:{},
+            	jobs:{}
+            }
         }
     }
 }
