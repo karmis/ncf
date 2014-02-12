@@ -59,6 +59,7 @@
                         {{ user.username }}
                     {% endif %}
                 </span>
+
                 <ul class="leftUser list-unstyled">
                     <li>
                         <a href="#" title="" class="sProfile">Мой профиль</a>
@@ -608,8 +609,10 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+
+
         $(function(){
-            init(
+            window.bs.nc.core.functions.init(
                     // Paths
                     {
                         "path_cart_search": "{{ path('cart_search') }}",

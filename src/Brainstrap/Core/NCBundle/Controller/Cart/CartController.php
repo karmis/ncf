@@ -237,11 +237,20 @@ class CartController extends Controller
                 $entityClient = $em->getRepository('BrainstrapCoreNCBundle:Client\Client')->findClientByCartCode($code);
                 if($entityClient)
                 {
-                    $serializer = $this->getSerializer();
-                    $entityCartJSON = $serializer->serialize($entityCart, 'json');
-                    $entityClientJSON = $serializer->serialize($entityClient, 'json');
+
+
+                    $ans = array(
+                            // Client
+                            'clientId'      => $entityClient->getId(),
+                            'clientName'    => $entityClient->getName(),
+                            'clientSname'   => $entityClient->getSname(),
+                            // Cart
+                            'cartId'        => $entityCart->getId(),
+                            'cartCode'      => $entityCart->getCode(),
+                        );
                     
-                    $return=array("responseCode"=>200, "entityCart" => $entityCartJSON, "entityClient" => $entityClientJSON);
+                    $ans = json_encode($ans);
+                    $return=array("responseCode"=>200, "entity" => $ans);
                 }
                 else
                 {
