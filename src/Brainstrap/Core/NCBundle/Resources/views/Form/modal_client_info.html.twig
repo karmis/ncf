@@ -6,7 +6,7 @@
             <h4 class="modal-title" id="modal-client-info-title">Информация о клиенте</h4>
           </div>
           <div class="modal-body">
-            <div bs-nc-type='html-not-persist-form'>
+            <div>
                 <input type="hidden" nc-type='field' nc-field="clientId" readonly="readonly" />
                 <input type="hidden" nc-type='field' nc-field="cartId" readonly="readonly" />
                 <h3> Клиент </h3>
@@ -41,7 +41,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-            <button type="button" bs-nc-action="btn-modal-call-window-for-create-personal-session" class="btn btn-success btn-send-req" data-loading-text="Ждите...">Создать сессию для клиента</button>
+            <button type="button" class="btn btn-success btn-request" bs-nc-type="trigger" bs-nc-trigger-controller="session" bs-nc-trigger-method="addSessionShowModal" bs-nc-trigger-form="#modal-client-info" data-loading-text="Загрузка...">Создать сессию для клиента</button>
           </div>
         </div>
       </div>

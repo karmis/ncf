@@ -62,11 +62,6 @@ class PersonalSessionController extends Controller
                     // die(print_r());
                     if(!empty($entityCart))
                     {
-
-                        // Расскоментировать когда решится вопрос с подменой типа сессии
-                        // $tmpCartType = $form->getData()->getType();
-                        // $type = !empty($tmpCartType)?$tmpCartType:$entityCart->getType();
-                        // $entity->setType($type);
                         
                         $entity->setCart($entityCart);
 
@@ -99,10 +94,6 @@ class PersonalSessionController extends Controller
         $return=json_encode($return);
         
         return new Response($return, 200, array('Content-Type'=>'application/json'));         
-        // return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:new.html.twig', array(
-        //     'entity' => $entity,
-        //     'form'   => $form->createView(),
-        // ));
     }
 
     /**

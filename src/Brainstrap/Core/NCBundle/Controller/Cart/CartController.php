@@ -57,7 +57,12 @@ class CartController extends Controller
                 $em->flush();
 
                 // $entityJSON = $serializer->serialize($entity, 'json');
-                $return = array("responseCode"=>200, "id" => $entity->getId());
+                $ans = array(
+                    'cartId' => $entity->getId()
+                );
+
+                $ans = json_encode($ans);
+                $return = array("responseCode"=>200, "entity" => $ans);
             }
             else
             {
@@ -257,7 +262,7 @@ class CartController extends Controller
                     $return=array("responseCode"=>404, "msg"=>"Клиент с таким номером карты не найден", "entity" => array("code" => $code));
                 }
             } else {
-                $return=array("responseCode"=>404, "msg"=>"Карта не найдена", "entity" => array("code" => $code));
+                $return=array("responseCode"=>404, "msg"=>"Карта не найдена", "entity" => array("cartCode" => $code));
             }
         }
         else

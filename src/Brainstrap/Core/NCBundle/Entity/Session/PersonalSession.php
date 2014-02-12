@@ -28,26 +28,23 @@ class PersonalSession
     private $cart;
 
     /**
-     * Тип карты для текущей сессии
-     * 
-     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Cart\CartType")
-     * @ORM\JoinColumn(name="cart_type_id", referencedColumnName="id")
-     */
-    private $type;
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="datetime")
+     * @ORM\Column(name="startDate", type="datetime", nullable=true)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endDate", type="datetime")
+     * @ORM\Column(name="endDate", type="datetime", nullable=true)
      */
     private $endDate;
+
+    public function __construct()
+    {
+        $this->startDate = new \DateTime('now');
+    }
 
     /**
      * Get id

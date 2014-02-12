@@ -11,7 +11,7 @@
         {# Форма создания клиента #}
         {{ form_start(clientForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-add-cart-with-client-client', 'role': 'form' } }) }}
             
-            {{ form_widget(clientForm.cart_id) }}
+            {{ form_widget(clientForm.cart_id, { 'attr': {'nc-field': 'cartId'}}) }}
             
             <div class="form-group">
                 <label for="article" class="col-md-2 control-label">Имя:</label>
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">Номер:</label>
                 <div class="col-md-10">
-                    {{ form_widget(cartForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты', 'readonly':'readonly'} }) }}
+                    {{ form_widget(cartForm.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты', 'readonly':'readonly', 'nc-field':'cartCode'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(cartForm.code) }}
                     </div>
@@ -90,7 +90,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-success btn-send-req" data-loading-text="Ждите..." bs-nc-action="add-cart-with-client">Создать клиента</button>
+        <button type="button" class="btn btn-success btn-request" bs-nc-type="trigger" bs-nc-trigger-controller="cartClient" bs-nc-trigger-method="addCartClient" bs-nc-trigger-form="#form-add-cart-with-client-cart" data-loading-text="Создание...">Создать клиента</button>
       </div>
     </div>
   </div>

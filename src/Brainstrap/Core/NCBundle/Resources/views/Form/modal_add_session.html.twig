@@ -1,38 +1,47 @@
-    <div class="modal fade" id="modal-add-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-title" aria-hidden="true">
-      <div class="modal-dialog">
+<div class="modal fade" id="modal-add-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-add-session-title" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modal-add-session-title">Добавить сессию</h4>
-          </div>
-
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-add-session-title">Добавить сессию</h4>
+            </div>
             {# Personal session #}
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab-modal-personal-session" data-toggle="tab"><span class="fa fa-user fa-2"></span></a></li>
-              <li><a href="#tab-modal-group-session" data-toggle="tab"><span class="fa fa-users fa-2"></span></a></li>
+                <li class="active">
+                    <a href="#tab-modal-personal-session" data-toggle="tab">
+                        <span class="fa fa-user fa-2"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab-modal-group-session" data-toggle="tab">
+                        <span class="fa fa-users fa-2"></span>
+                    </a>
+                </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab-modal-personal-session">
                     <div class="">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modal-request-cart-for-search-by-code-title">Сессия для персоны</h4>
+                        </div>
                         <p>
                             <div class="modal-body">
-
                             {{ form_start(personalSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-modal-add-personal-session', 'role': 'form' } }) }}
-                                {{ form_widget(personalSessionForm.cart_id) }}
-                                {{ form_widget(personalSessionForm.client_id) }}
-                                <h2> Сессия для персоны </h2>
-
+                                {{ form_widget(personalSessionForm.cart_id, { 'attr': {'nc-field': 'cartId' } }) }}
+                                {{ form_widget(personalSessionForm.client_id, { 'attr': {'nc-field': 'clientId' } }) }}
 
                                 {{ form_rest(personalSessionForm) }}
                             {{ form_end(personalSessionForm) }}
-                            {# <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code"> + </button> #}
+                            {#
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code">+</button>
+                                #}
                             </div>
-                              <div class="modal-footer">
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                                <button type="button" bs-nc-action="btn-modal-add-personal-session" class="btn btn-success btn-send-req" data-loading-text="Ждите...">Сохранить</button>
-                              </div>
+                                <button type="button" class="btn btn-success btn-request" id="session_addSession" bs-nc-type="trigger" bs-nc-trigger-controller="session" bs-nc-trigger-method="addSession" bs-nc-trigger-form="#form-modal-add-personal-session" data-loading-text="Создание...">Создать</button>
+                            </div>
                         </p>
                     </div>
                 </div>
@@ -41,22 +50,21 @@
                     <div class="">
                         <p>
                             <div class="modal-body">
-                            {{ form_start(groupSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-modal-add-group-session', 'role': 'form' } }) }}
+                                {{ form_start(groupSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-modal-add-group-session', 'role': 'form' } }) }}
                                 {{ form_widget(groupSessionForm.cart_id) }}
                                 {{ form_widget(personalSessionForm.client_id) }}
-                                <h2> Сессия для группы </h2>
-
+                                <h2>Сессия для группы</h2>
                                 {{ form_rest(groupSessionForm) }}
                             {{ form_end(groupSessionForm) }}
                             </div>
-                              <div class="modal-footer">
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                                 <button type="button" class="btn btn-success btn-send-req" data-loading-text="Ждите...">Сохранить</button>
-                              </div>
+                            </div>
                         </p>
                     </div>
                 </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>

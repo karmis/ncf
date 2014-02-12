@@ -24,19 +24,6 @@ class PersonalSessionType extends AbstractType
                                 'mapped' => false,
                                 'error_bubbling' => true,
                             ))
-            
-            ->add('type', null, array(
-                    'empty_value' => "",
-                    'error_bubbling' => true,
-                ))
-            
-            ->add('startDate', null, array(
-                    'error_bubbling' => true,
-                ))
-            
-            ->add('endDate', null, array(
-                    'error_bubbling' => true,
-                ))
         ;
     }
     

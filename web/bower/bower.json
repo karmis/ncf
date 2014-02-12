@@ -8,6 +8,7 @@
       "jquery-ui": "jquery-ui#latest",
       "fontawesome": "components-font-awesome#latest",
       "jstorage": "#latest",
-      "json2": "#latest"
+      "json2": "#latest",
+      "bootstrap-notify": "#latest"
     }
 }

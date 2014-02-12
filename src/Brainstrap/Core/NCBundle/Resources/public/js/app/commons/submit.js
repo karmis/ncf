@@ -40,10 +40,11 @@ window.bs.nc.core.commons.submit.form.ajax = function(fEl, bEl, path, callbacks,
 				var resp = $.parseJSON(data);
 				switch (resp.responseCode){
 					case 200:
+						window.bs.nc.core.commons.clearForm(fEl);
 						callbacks["200"](resp);
 					break;
 					case 404:
-						debugger;
+						window.bs.nc.core.commons.clearForm(fEl);
 						callbacks["404"](resp);
 					break;
 					case 500:

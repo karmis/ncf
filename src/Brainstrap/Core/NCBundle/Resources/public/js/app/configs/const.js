@@ -1,6 +1,7 @@
 window.bs = {
     nc: {
         core: {
+        	memory: {},
             functions: {},
             paths: {},
             controllers: {},
