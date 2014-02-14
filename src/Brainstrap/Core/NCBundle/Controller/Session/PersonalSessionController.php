@@ -29,11 +29,24 @@ class PersonalSessionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->findAll();
+        $entitiesArr = array("aaData"=>array());
+        for ($i=0; $i < count($entities); $i++) { 
+            $entity = $entities[$i];
+            $entityArr = array(
+                    "cartCode" => $entity->getCart()->getCode(),
+                    "cartType" => $entity->getCart()->getType()->getCaption(),
+                    "startDate" => $entity->getStartDate()->format("H:i"),
+                    "clientFullName" => $entity->getCart()->getClient()->getName() . " " . $entity->getCart()->getClient()->getSname()
+                );
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:index.html.twig', array(
-            'entities' => $entities,
-        ));
+            array_push($entitiesArr["aaData"], $entityArr);
+        }
+
+        $return=json_encode($entitiesArr);
+        
+        return new Response($return, 200, array('Content-Type'=>'application/json'));    
     }
+
     /**
      * Creates a new Session\PersonalSession entity.
      *

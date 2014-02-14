@@ -30,12 +30,15 @@ window.bs.nc.core.controllers.sessionController = {
 															// Success
 															200: function(json)
 															{
+																window.bs.nc.core.ui.tables.sessions.reinit();
+
 																$("#modal-add-session").modal('hide');
 																
 																$('.notification').notify({
 																	message: { text: 'Сессия успешно создана' },
 																	type: "bangTidy"
 																}).show();
+
 															}
 														}
 													)

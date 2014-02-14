@@ -39,11 +39,8 @@ window.bs.nc.core.controllers.cartController = {
 														{
 															// Show cart/info client
 															200: function(json)
-															{	
-																
-
+															{
 																var entity = $.parseJSON(json.entity);
-																debugger;
 																window.bs.nc.core.commons.fillDataForm($("#form-modal-add-personal-session"), entity);
 																$('.notification').notify({
 																		message: { text: 'Клиент успешно создан' },

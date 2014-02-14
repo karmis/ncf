@@ -7,6 +7,9 @@ window.bs = {
             controllers: {},
             listeners: {},
             commons: {},
+            ui:{
+                tables:{},
+            },
             cron: {
             	crontab:{},
             	cronjob:{},

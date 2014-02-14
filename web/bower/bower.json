@@ -9,6 +9,8 @@
       "fontawesome": "components-font-awesome#latest",
       "jstorage": "#latest",
       "json2": "#latest",
-      "bootstrap-notify": "#latest"
+      "bootstrap-notify": "#latest",
+      "DataTables": "#latest",
+      "datatables-tabletools": "#latest"
     }
 }
