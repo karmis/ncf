@@ -20,13 +20,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="fio", type="string")
-     */
-    protected $fio;
-
-    /**
      * @Assert\File( maxSize="20M")
      * @FileStore\UploadableField(mapping="userAvatar")
      * @ORM\Column(type="array")
