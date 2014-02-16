@@ -1,18 +1,16 @@
 window.bs.nc.core.controllers.sessionController = {
+	auto: {
+		showAddSessionAction: function(json){
+			var entity = $.parseJSON(json.entity);
+			var fEl = $("#modal-client-info-with-create-session");
+			window.bs.nc.core.commons.fillDataForm(fEl, entity);
+			$("#modal-client-info-with-create-session").modal('show');
+		}
+		
+	},
 	click: {
-		addSessionShowModalAction: function(e, el){
+		showAddSessionAction: function(e, el){
 			var form = el.attr("bs-nc-trigger-form");
-			// if(!window.bs.nc.core.memory.clientId || !window.bs.nc.core.memory.cartId)
-			// {
-			// 	alert('FATAL!!!!!1111');
-			// 	return false;
-			// }
-			// else
-			// {
-			// 	$('#brainstrap_core_ncbundle_session_personalsession_cart_id').val(window.bs.nc.core.memory.cartId);
-			// 	$('#brainstrap_core_ncbundle_session_personalsession_client_id').val(window.bs.nc.core.memory.clientId);
-			// }
-			
 			$("#modal-client-info").modal('hide');
 			$("#modal-add-session").modal('show');
 
@@ -30,9 +28,10 @@ window.bs.nc.core.controllers.sessionController = {
 															// Success
 															200: function(json)
 															{
+																window.bs.nc.core.controllers.infoController.auto.getTotalSessionInfo();
 																window.bs.nc.core.ui.tables.sessions.reinit();
 
-																$("#modal-add-session").modal('hide');
+																$("#modal-client-info-with-create-session").modal('hide');
 																
 																$('.notification').notify({
 																	message: { text: 'Сессия успешно создана' },
@@ -41,9 +40,44 @@ window.bs.nc.core.controllers.sessionController = {
 
 															}
 														}
-													)
+													);
 
 			
+		},
+
+		itemSessionInfoShowAction: function(code){
+			$("#modal-client-info").modal('hide');
+		},
+		showRemoveSessionAction: function(sessionId){
+			debugger;
+			window.bs.nc.core.commons.fillDataForm($("#form-remove-session"), {sessionId: sessionId});
+			$("#modal-remove-session").modal('show');
+		},
+		removeSessionAction: function(e, el){
+			var form = el.attr("bs-nc-trigger-form");
+
+			// Send request
+			window.bs.nc.core.commons.submit.form.ajax(
+														$(form), // form
+														el, // btn element
+														window.bs.nc.core.paths.path_session_personalsession_delete, // path
+														{
+															// Success
+															200: function(json)
+															{
+																window.bs.nc.core.controllers.infoController.auto.getTotalSessionInfo();
+																window.bs.nc.core.ui.tables.sessions.reinit();
+
+																$("#modal-remove-session").modal('hide');
+																
+																$('.notification').notify({
+																	message: { text: 'Сессия успешно удалена' },
+																	type: "bangTidy"
+																}).show();
+
+															}
+														}
+													);
 		}
 
 	}

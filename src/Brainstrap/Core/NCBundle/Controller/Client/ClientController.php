@@ -45,8 +45,6 @@ class ClientController extends Controller
             $entity = new Client();
             $form = $this->createCreateForm($entity);
             $form->handleRequest($request);
-            $serializer = $this->getSerializer();
-
 
             if ($form->isValid()) {
                 $cartId = $form['cart_id']->getData();
@@ -88,9 +86,6 @@ class ClientController extends Controller
                             );
                         $ans = json_encode($ans);
                         // die('plplpl');
-
-                        // $clientName = $serializer->serialize($entity->getName(), 'json');
-                        // $clientSName = $serializer->serialize($entity->getSName(), 'json');
                         $return = array("responseCode"=>200, "entity" => $ans);
                     }
                 }

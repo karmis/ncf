@@ -5,13 +5,12 @@ window.bs.nc.core.functions.init = function(paths)
 	window.bs.nc.core.functions.ready();
 
 	window.bs.nc.core.ui.tables.sessions.init();
-	// window.bs.nc.core.wizards
 }
 
 window.bs.nc.core.functions.ready = function()
 {
 
-
+    window.bs.nc.core.controllers.infoController.auto.getTotalInfo();
     // editor = new $.fn.dataTable.Editor( {
     //     "ajaxUrl": "php/browsers.php",
     //     "domTable": "#example",

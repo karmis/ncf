@@ -26,3 +26,18 @@ BrainstrapCoreNCBundle_session_groupsession:
     resource: "@BrainstrapCoreNCBundle/Resources/config/routing/session_groupsession.yml"
     prefix:   /session/groupsession
 
+info_total:
+    pattern:  /total/info/all
+    defaults: { _controller: BrainstrapCoreNCBundle:Info/Info:totalAll }
+
+info_money_total:
+    pattern:  /total/info/money
+    defaults: { _controller: BrainstrapCoreNCBundle:Info/Info:totalMoney }
+
+info_client_total:
+    pattern:  /total/info/client
+    defaults: { _controller: BrainstrapCoreNCBundle:Info/Info:totalClient}
+
+info_session_total:
+    pattern:  /total/info/session
+    defaults: { _controller: BrainstrapCoreNCBundle:Info/Info:totalSession}

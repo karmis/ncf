@@ -2,8 +2,9 @@
 
 namespace Brainstrap\Core\NCBundle\Controller\Session;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -11,8 +12,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 use Brainstrap\Core\NCBundle\Entity\Session\PersonalSession;
-use Brainstrap\Core\NCBundle\Form\Session\PersonalSessionType;
 
+use Brainstrap\Core\NCBundle\Form\Session\PersonalSessionType;
+use Brainstrap\Core\NCBundle\Form\Session\RemoveSessionType;
 /**
  * Session\PersonalSession controller.
  *
@@ -24,25 +26,33 @@ class PersonalSessionController extends Controller
      * Lists all Session\PersonalSession entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        if($request->isXmlHttpRequest())
+        {
+            $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->findAll();
-        $entitiesArr = array("aaData"=>array());
-        for ($i=0; $i < count($entities); $i++) { 
-            $entity = $entities[$i];
-            $entityArr = array(
-                    "cartCode" => $entity->getCart()->getCode(),
-                    "cartType" => $entity->getCart()->getType()->getCaption(),
-                    "startDate" => $entity->getStartDate()->format("H:i"),
-                    "clientFullName" => $entity->getCart()->getClient()->getName() . " " . $entity->getCart()->getClient()->getSname()
-                );
+            $entities = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->findAll();
+            $entitiesArr = array("aaData"=>array());
+            for ($i=0; $i < count($entities); $i++) { 
+                $entity = $entities[$i];
+                $entityArr = array(
+                        "sessionId" => $entity->getId(),
+                        "cartCode" => $entity->getCart()->getCode(),
+                        "cartType" => $entity->getCart()->getType()->getCaption(),
+                        "startDate" => $entity->getStartDate()->format("H:i"),
+                        "clientFullName" => $entity->getCart()->getClient()->getName() . " " . $entity->getCart()->getClient()->getSname(),
+                    );
 
-            array_push($entitiesArr["aaData"], $entityArr);
+                array_push($entitiesArr["aaData"], $entityArr);
+            }
+
+            $return=json_encode($entitiesArr);
         }
-
-        $return=json_encode($entitiesArr);
+        else
+        {
+            $return=array("responseCode"=>500, "msg"=>"Для обработка доступны только асинхронные запросы");
+        }
         
         return new Response($return, 200, array('Content-Type'=>'application/json'));    
     }
@@ -132,61 +142,61 @@ class PersonalSessionController extends Controller
      * Displays a form to create a new Session\PersonalSession entity.
      *
      */
-    public function newAction()
-    {
-        $entity = new PersonalSession();
-        $form   = $this->createCreateForm($entity);
+    // public function newAction()
+    // {
+    //     $entity = new PersonalSession();
+    //     $form   = $this->createCreateForm($entity);
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
+    //     return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:new.html.twig', array(
+    //         'entity' => $entity,
+    //         'form'   => $form->createView(),
+    //     ));
+    // }
 
     /**
      * Finds and displays a Session\PersonalSession entity.
      *
      */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // public function showAction($id)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
+    //     $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
-        }
+    //     if (!$entity) {
+    //         throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
+    //     }
 
-        $deleteForm = $this->createDeleteForm($id);
+    //     $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
-    }
+    //     return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:show.html.twig', array(
+    //         'entity'      => $entity,
+    //         'delete_form' => $deleteForm->createView(),        ));
+    // }
 
     /**
      * Displays a form to edit an existing Session\PersonalSession entity.
      *
      */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // public function editAction($id)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
+    //     $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
-        }
+    //     if (!$entity) {
+    //         throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
+    //     }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+    //     $editForm = $this->createEditForm($entity);
+    //     $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+    //     return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:edit.html.twig', array(
+    //         'entity'      => $entity,
+    //         'edit_form'   => $editForm->createView(),
+    //         'delete_form' => $deleteForm->createView(),
+    //     ));
+    // }
 
     /**
     * Creates a form to edit a Session\PersonalSession entity.
@@ -210,54 +220,93 @@ class PersonalSessionController extends Controller
      * Edits an existing Session\PersonalSession entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // public function updateAction(Request $request, $id)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
+    //     $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
-        }
+    //     if (!$entity) {
+    //         throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
+    //     }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+    //     $deleteForm = $this->createDeleteForm($id);
+    //     $editForm = $this->createEditForm($entity);
+    //     $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
-            $em->flush();
+    //     if ($editForm->isValid()) {
+    //         $em->flush();
 
-            return $this->redirect($this->generateUrl('session_personalsession_edit', array('id' => $id)));
-        }
+    //         return $this->redirect($this->generateUrl('session_personalsession_edit', array('id' => $id)));
+    //     }
 
-        return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+    //     return $this->render('BrainstrapCoreNCBundle:Session/PersonalSession:edit.html.twig', array(
+    //         'entity'      => $entity,
+    //         'edit_form'   => $editForm->createView(),
+    //         'delete_form' => $deleteForm->createView(),
+    //     ));
+    // }
     /**
      * Deletes a Session\PersonalSession entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+        if($request->isXmlHttpRequest())
+        {
+            
+            $entity = new PersonalSession();
+            $form = $this->createForm(new RemoveSessionType(), $entity);
+            $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
+            if ($form->isValid())
+            {
+                $sessionId = $form->get('session_id')->getData();
+                $em = $this->getDoctrine()->getManager();
+                $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($sessionId);  
+                if (!$entity)
+                {
+                    $return=array("responseCode"=>500, "msg"=>"Сессия не найдена");
+                }
+                else
+                {
+                    $em->remove($entity);
+                    $em->flush();
+                    $return=array("responseCode"=>200, "msg"=>"Сессия успешно удалена");
+                }
             }
-
-            $em->remove($entity);
-            $em->flush();
+            else
+            {
+                $formErrors = $this->getErrorsAsArray($form);
+                $return = array("responseCode"=>500, "msg" => $formErrors);
+            }
+        }
+        else
+        {
+            $return=array("responseCode"=>500, "msg"=>"Для обработка доступны только асинхронные запросы");
         }
 
-        return $this->redirect($this->generateUrl('session_personalsession'));
+        $return=json_encode($return);
+        
+        return new Response($return, 200, array('Content-Type'=>'application/json'));   
+
+        // $form = $this->createDeleteForm($id);
+        // $form->handleRequest($request);
+
+        // if ($form->isValid()) {
+        //     $em = $this->getDoctrine()->getManager();
+        //     $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($id);
+
+        //     if (!$entity) {
+        //         throw $this->createNotFoundException('Unable to find Session\PersonalSession entity.');
+        //     }
+
+        //     $em->remove($entity);
+        //     $em->flush();
+        // }
+
+        // return $this->redirect($this->generateUrl('session_personalsession'));
     }
 
     /**
@@ -267,15 +316,15 @@ class PersonalSessionController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('session_personalsession_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
-    }
+    // private function createDeleteForm($id)
+    // {
+    //     return $this->createFormBuilder()
+    //         ->setAction($this->generateUrl('session_personalsession_delete', array('id' => $id)))
+    //         ->setMethod('DELETE')
+    //         ->add('submit', 'submit', array('label' => 'Delete'))
+    //         ->getForm()
+    //     ;
+    // }
 
     private function getErrorsAsArray($form)
     {

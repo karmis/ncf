@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="article" class="col-md-2 control-label">Имя:</label>
                 <div class="col-md-10">
-                    {{ form_widget(clientForm.name, { 'attr': {'class': 'form-control validate-name', 'placeholder': 'Имя'} }) }}
+                    {{ form_widget(clientForm.name, { 'attr': {'class': 'form-control validate-name', 'placeholder': 'Имя', 'nc-field':'clientName'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(clientForm.name) }}
                     </div>
@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="article" class="col-md-2 control-label">Фамилия:</label>
                 <div class="col-md-10">
-                    {{ form_widget(clientForm.sname, { 'attr': {'class': 'form-control validate-sname', 'placeholder': 'Фамилия'} }) }}
+                    {{ form_widget(clientForm.sname, { 'attr': {'class': 'form-control validate-sname', 'placeholder': 'Фамилия', 'nc-field':'clientSname'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(clientForm.sname) }}
                     </div>
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="article" class="col-md-2 control-label">День рождения:</label>
                 <div class="col-md-10">
-                    {{ form_widget(clientForm.birthday, { 'attr': {'class': 'form-control validate-birthday', 'placeholder': 'День рождения'} }) }}
+                    {{ form_widget(clientForm.birthday, { 'attr': {'class': 'form-control validate-birthday', 'placeholder': 'День рождения', 'nc-field':'clientBirthday'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(clientForm.birthday) }}
                     </div>
@@ -77,7 +77,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">Секретное слово:</label>
                 <div class="col-md-10">
-                    {{ form_widget(cartForm.keyword, { 'attr': {'class': 'form-control validate-keyword', 'placeholder': 'Секретное слово'} }) }}
+                    {{ form_widget(cartForm.keyword, { 'attr': {'class': 'form-control validate-keyword', 'placeholder': 'Секретное слово', 'nc-field':'cartKeyword'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(cartForm.keyword) }}
                     </div>
@@ -90,7 +90,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-success btn-request" bs-nc-type="trigger" bs-nc-trigger-controller="cartClient" bs-nc-trigger-method="addCartClient" bs-nc-trigger-form="#form-add-cart-with-client-cart" data-loading-text="Создание...">Создать клиента</button>
+        <button type="button" class="btn btn-success btn-request" bs-nc-type="trigger" bs-nc-trigger-controller="cart" bs-nc-trigger-method="addCart" bs-nc-trigger-form="#form-add-cart-with-client-cart" data-loading-text="Создание...">Создать клиента</button>
       </div>
     </div>
   </div>

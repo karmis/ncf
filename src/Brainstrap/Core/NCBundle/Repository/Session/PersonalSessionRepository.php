@@ -37,4 +37,22 @@ class PersonalSessionRepository extends EntityRepository
 
 		return $query->getOneOrNullResult();
 	}
+
+	/**
+	 * 
+	 */
+	public function getTotalActiveSessions()
+	{
+		$query = $this->createQueryBuilder('session')
+			->select('COUNT(session)')
+			->getQuery();
+
+		try {
+			$result = $query->getSingleScalarResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			$result = 0;
+		}
+
+		return $result;
+	}
 }

@@ -9,6 +9,8 @@ use Brainstrap\Core\NCBundle\Form\Cart\CartType;
 use Brainstrap\Core\NCBundle\Form\Client\ClientType;
 use Brainstrap\Core\NCBundle\Form\Session\PersonalSessionType;
 use Brainstrap\Core\NCBundle\Form\Session\GroupSessionType;
+use Brainstrap\Core\NCBundle\Form\Session\RemoveSessionType;
+
 
 
 class FormController extends Controller
@@ -71,9 +73,36 @@ class FormController extends Controller
     /**
      * Returned modal added session
      */ 
+    public function getModalRemoveSessionFormAction()
+    {
+        // Форма удаления сессии
+        $removeSessionForm = $this->createForm(new RemoveSessionType());
+
+        return $this->render('BrainstrapCoreNCBundle:Form:modal_remove_session.html.twig', array(
+                                                                                            'removeSessionForm'   => $removeSessionForm->createView(),
+                                                                                        ));
+    }
+
+    /**
+     * Returned modal added session
+     */ 
     public function getModalClientInfoFormAction()
     {
 
         return $this->render('BrainstrapCoreNCBundle:Form:modal_client_info.html.twig');
+    }
+
+    public function getModalClientInfoWithCreateSessionFormAction()
+    {
+        // Форма создания персональной сессии
+        $personalSessionForm = $this->createForm(new PersonalSessionType());
+
+        // Форма создания групповой сессии
+        $groupSessionForm = $this->createForm(new GroupSessionType());
+
+        return $this->render('BrainstrapCoreNCBundle:Form:modal_client_info_with_create_session.html.twig', array(
+                                                                                            'personalSessionForm'   => $personalSessionForm->createView(),
+                                                                                            'groupSessionForm'      => $groupSessionForm->createView()
+                                                                                        ));        
     }
 }

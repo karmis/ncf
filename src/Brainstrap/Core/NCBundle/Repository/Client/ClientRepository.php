@@ -40,4 +40,22 @@ class ClientRepository extends EntityRepository
 
 		return $query->getOneOrNullResult();
 	}
+
+	/**
+	 * 
+	 */
+	public function getTotalActiveClients()
+	{
+		$query = $this->createQueryBuilder('client')
+			->select('COUNT(client)')
+			->getQuery();
+
+		try {
+			$result = $query->getSingleScalarResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			$result = 0;
+		}
+
+		return $result;
+	}
 }

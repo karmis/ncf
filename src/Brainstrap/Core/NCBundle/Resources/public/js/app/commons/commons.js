@@ -18,7 +18,7 @@ window.bs.nc.core.commons.fillDataForm = function(fEl, entity)
 	if(!entity){
 		return;
 	}
-	
+	window.bs.nc.core.commons.clearForm(fEl);
 	$.each(entity, function(key, val){
 		var elArr= fEl.find("[nc-field='"+ key +"']");
 		if(elArr.length){

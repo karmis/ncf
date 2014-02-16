@@ -43,11 +43,16 @@
             {% endblock content %}
 
             {% block modal %}
+
+
+
                 {% block modal_request_cart %}{% endblock modal_request_cart %}
                 {% block modal_request_wait %}{% endblock modal_request_wait %}
                 {% block modal_add_cart_with_client %}{% endblock modal_add_cart_with_client %}
                 {% block modal_add_session %}{% endblock modal_add_session %}
+                {% block modal_remove_session %}{% endblock modal_remove_session %}
                 {% block modal_client_info %}{% endblock modal_client_info %}
+                {% block modal_client_info_with_session %}{% endblock modal_client_info_with_session %}
                 {# {% block modal_add_session_group %}{% endblock modal_add_session_group %} #}
             {% endblock modal %}
 
@@ -76,9 +81,10 @@
             
             {# Controllers #}
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/cartController.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/clientController.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/sessionController.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/infoController.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/controllers/cartClientController.js') }}"></script>
+            
             
             {# UI #}
             <script type="text/javascript" src="{{ asset('bundles/brainstrapcorenc/js/app/ui/tables/ui-tables-sessions.js') }}"></script>

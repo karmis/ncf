@@ -1,0 +1,21 @@
+<div class="modal fade" id="modal-remove-session" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-remove-session-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-remove-session-title">Завершение сессии</h4>
+      </div>
+      <div class="modal-body">
+        {{ form_start(removeSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-remove-session', 'role': 'form' } }) }}
+            {{ form_widget(removeSessionForm.session_id, {'attr': {'nc-type': 'field', 'nc-field': "sessionId"}}) }}            
+            
+            {{ form_rest(removeSessionForm) }}
+        {{ form_end(removeSessionForm) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-success btn-request" bs-nc-type="trigger" bs-nc-trigger-controller="session" bs-nc-trigger-method="removeSession" bs-nc-trigger-form="#form-remove-session" data-loading-text="Загрузка...">Завершить</button>
+      </div>
+    </div>
+  </div>
+</div>
