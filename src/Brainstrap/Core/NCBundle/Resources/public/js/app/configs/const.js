@@ -8,7 +8,10 @@ window.bs = {
             listeners: {},
             commons: {},
             ui:{
-                tables:{},
+                tables:{
+                    sessions:{},
+                    reports:{}
+                },
             },
             cron: {
             	crontab:{},

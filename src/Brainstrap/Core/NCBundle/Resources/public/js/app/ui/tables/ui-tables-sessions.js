@@ -52,13 +52,6 @@ window.bs.nc.core.ui.tables.sessions = {
         oTable.fnSort([
             [3, 'desc']
         ]);
-        //===== Dynamic table toolbars =====//		
-        $('.tOptions').click(function() {
-            $('.tablePars').slideToggle(200);
-        });
-        $('.tOptions').click(function() {
-            $(this).toggleClass("act");
-        });
     },
     destroy: function() {
         $('[nc-interface-unit="data-table-sessions"]').dataTable().fnDestroy();

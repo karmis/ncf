@@ -6,6 +6,10 @@ nc_settings_index:
     pattern:  /do/settings/
     defaults: { _controller: BrainstrapCoreNCBundle:Settings:index }
 
+nc_reports_index:
+    pattern:  /do/reports/
+    defaults: { _controller: BrainstrapCoreNCBundle:Reports:index }
+
 BrainstrapCoreNCBundle_client:
     resource: "@BrainstrapCoreNCBundle/Resources/config/routing/client_client.yml"
     prefix:   /client

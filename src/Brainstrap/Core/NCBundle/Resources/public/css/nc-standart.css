@@ -52,7 +52,7 @@ a:hover {
 	color: #333;
 	border-color: #ccc #ccc #ddd;	
 }
-a>.fa:hover {
+a.tOptions>.fa:hover {
 	background-color: inherit;
 	background-image: none;
 	text-decoration: none;

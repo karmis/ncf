@@ -13,7 +13,16 @@ window.bs.nc.core.functions.ready = function()
     window.bs.nc.core.controllers.infoController.auto.getTotalInfo();
     $('input[nc-field="requestCartCode"]').inputmask({
       mask: '999-999-999'
-    })
+    });
+
+
+    //===== Dynamic table toolbars =====//      
+    $('.tOptions').click(function() {
+        $('.tablePars').slideToggle(200);
+    });
+    $('.tOptions').click(function() {
+        $(this).toggleClass("act");
+    });
     // editor = new $.fn.dataTable.Editor( {
     //     "ajaxUrl": "php/browsers.php",
     //     "domTable": "#example",
