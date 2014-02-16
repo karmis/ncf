@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 use Brainstrap\Core\NCBundle\Entity\Session\PersonalSession;
+use Brainstrap\Core\NCBundle\Entity\Reports\SessionReport;
 
 use Brainstrap\Core\NCBundle\Form\Session\PersonalSessionType;
 use Brainstrap\Core\NCBundle\Form\Session\RemoveSessionType;
@@ -74,21 +75,24 @@ class PersonalSessionController extends Controller
                 $clientId = $form->get('client_id')->getData();
                 $cartId = $form->get('cart_id')->getData();
 
-                // $entitySession = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($cartId);
                 if (!empty($clientId) && !empty($cartId))
                 {
                     $em = $this->getDoctrine()->getManager();
-                    // die($cartId . " __");
+
                     $entityCart = $em->getRepository('BrainstrapCoreNCBundle:Cart\Cart')->find($cartId);
-                    // $entityClient = $em->getRepository('BrainstrapCoreNCBundle:Client\Client')->findClientByCartClientId($clientId, $cartId);
                     
-                    // die(print_r());
                     if(!empty($entityCart))
                     {
-                        
+                        $sessionReport = new SessionReport();
+
+                        $sessionReport->setCart($entityCart);
+                        $em->persist($entity);
+                        $em->flush();
+
+                        $sessionReport->setSessionId($entity->getId());
                         $entity->setCart($entityCart);
 
-                        $em->persist($entity);
+                        $em->persist($sessionReport);
                         $em->flush();
 
                         $return = array("responseCode"=>200, "id" => $entity->getId());
@@ -262,6 +266,7 @@ class PersonalSessionController extends Controller
 
             if ($form->isValid())
             {
+
                 $sessionId = $form->get('session_id')->getData();
                 $em = $this->getDoctrine()->getManager();
                 $entity = $em->getRepository('BrainstrapCoreNCBundle:Session\PersonalSession')->find($sessionId);  
@@ -271,6 +276,16 @@ class PersonalSessionController extends Controller
                 }
                 else
                 {
+                    $sessionReport = $em->getRepository('BrainstrapCoreNCBundle:Reports\SessionReport')->getReportBySessionId($sessionId);  
+                    
+                    if(!$sessionReport){
+                        $sessionReport = new SessionReport();
+                        $sessionReport->setCart($entity->getCart());
+                    }
+
+                    $sessionReport->setEndDate(new \DateTime('now'));
+                    $sessionReport->setStatusComplete($form->getData()->getStatusComplete());
+                    $em->persist($sessionReport);
                     $em->remove($entity);
                     $em->flush();
                     $return=array("responseCode"=>200, "msg"=>"Сессия успешно удалена");

@@ -11,6 +11,9 @@ window.bs.nc.core.functions.ready = function()
 {
 
     window.bs.nc.core.controllers.infoController.auto.getTotalInfo();
+    $('input[nc-field="requestCartCode"]').inputmask({
+      mask: '999-999-999'
+    })
     // editor = new $.fn.dataTable.Editor( {
     //     "ajaxUrl": "php/browsers.php",
     //     "domTable": "#example",

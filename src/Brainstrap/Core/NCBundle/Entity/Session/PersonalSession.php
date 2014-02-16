@@ -35,11 +35,10 @@ class PersonalSession
     private $startDate;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="endDate", type="datetime", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Brainstrap\Core\NCBundle\Entity\Session\StatusSession")
+     * @ORM\JoinColumn(name="status_session_id", referencedColumnName="id")
      */
-    private $endDate;
+    private $statusComplete;
 
     public function __construct()
     {
@@ -77,29 +76,6 @@ class PersonalSession
     public function getStartDate()
     {
         return $this->startDate;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param \DateTime $endDate
-     * @return PersonalSession
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return \DateTime 
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
@@ -146,5 +122,28 @@ class PersonalSession
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set statusComplete
+     *
+     * @param \Brainstrap\Core\NCBundle\Entity\Session\StatusSession $statusComplete
+     * @return PersonalSession
+     */
+    public function setStatusComplete(\Brainstrap\Core\NCBundle\Entity\Session\StatusSession $statusComplete = null)
+    {
+        $this->statusComplete = $statusComplete;
+
+        return $this;
+    }
+
+    /**
+     * Get statusComplete
+     *
+     * @return \Brainstrap\Core\NCBundle\Entity\Session\StatusSession 
+     */
+    public function getStatusComplete()
+    {
+        return $this->statusComplete;
     }
 }

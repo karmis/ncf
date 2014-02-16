@@ -11,6 +11,8 @@
       "json2": "#latest",
       "bootstrap-notify": "#latest",
       "DataTables": "#latest",
-      "datatables-tabletools": "#latest"
+      "datatables-tabletools": "#latest",
+      "bootstrap-maxlength": "#latest",
+      "bootstrap-jasny": "#latest"
     }
 }

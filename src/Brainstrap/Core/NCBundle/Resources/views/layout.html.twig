@@ -1,292 +1,277 @@
 {% extends "::base.html.twig" %}
-
 {% block top %}
-    <nav class="navbar nc-top-navbar" role="navigation" id='top'>
-
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nc-nav-top">
-                <span class="sr-only">
-                    <a href="{{ path('nc_interface_index') }}" title="">
-                        <img src="{{ asset('bundles/brainstrapcorenc/images/logo.png') }}" alt="" />
-                    </a>
-                </span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('nc_interface_index') }}" title="">
-                <img src="{{ asset('bundles/brainstrapcorenc/images/logo.png') }}" alt="" />
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="nc-nav-top">
-    {#         <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Link</a>
-                </li>
-                <li>
-                    <a href="#">Link</a>
-                </li>
-            </ul> #}
-            <p class="navbar-text navbar-right">
-                <i class="fa fa-bell-o fa-5"></i>
-            </p>
-        </div>
-    </nav>
-    <div class="clearfix"></div>
+<nav class="navbar nc-top-navbar" role="navigation" id='top'>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nc-nav-top">
+        <span class="sr-only">
+        <a href="{{ path('nc_interface_index') }}" title="">
+        {# <img src="{{ asset('bundles/brainstrapcorenc/images/logo.png') }}" alt="" /> #}
+        </a>
+        </span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('nc_interface_index') }}" title="">
+        {# <img src="{{ asset('bundles/brainstrapcorenc/images/logo.png') }}" alt="" /> #}
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="nc-nav-top">
+        {#         <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">Link</a>
+            </li>
+            <li>
+                <a href="#">Link</a>
+            </li>
+        </ul> #}
+        <p class="navbar-text navbar-right">
+        <i class="fa fa-bell-o fa-5"></i>
+        </p>
+    </div>
+</nav>
+<div class="clearfix"></div>
 {% endblock top %}
-
 {% block sidebar %}
 <div id="sidebar">
     {% block mainNav %}
-        {% set user = app.security.getToken().getUser() %}
-        <div id="mainNav" class="mainNav">
-            <div class="user">
-                <a title="" class="leftUserDrop">
-                    {% if user.username is defined %}
-                        <img src="{{ user.userAvatar.path | apply_filter('avatar_user')}}" />
-                    {% endif %}
-                    <span>
-                        <strong>3</strong>
-                    </span>
-                </a>
-                <span>
-                    {% if user.username is defined %}
-                        {{ user.username }}
-                    {% endif %}
-                </span>
-
-                <ul class="leftUser list-unstyled">
-                    <li>
-                        <a href="#" title="" class="sProfile">Мой профиль</a>
-                    </li>
-                    <li>
-                        <a href="#" title="" class="sMessages">Сообщения</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('nc_settings_index') }}" title="" class="sSettings">Настройки</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('fos_user_security_logout') }}" class="sLogout">Выход</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Responsive nav -->
-            <div class="altNav">
-                <div class="userSearch">
-                    <form action="">
-                        <input type="text" placeholder="search..." name="userSearch" />
-                        <input type="submit" value="" />
-                    </form>
-                </div>
-
-                <!-- User nav -->
-                <ul class="userNav list-unstyled">
-                    <li>
-                        <a href="#" title="" class="profile"></a>
-                    </li>
-                    <li>
-                        <a href="#" title="" class="messages"></a>
-                    </li>
-                    <li>
-                        <a href="#" title="" class="settings"></a>
-                    </li>
-                    <li>
-                        <a href="#" title="" class="logout"></a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Main nav -->
-            <ul class="nav list-unstyled">
+    {% set user = app.security.getToken().getUser() %}
+    <div id="mainNav" class="mainNav">
+        <div class="user">
+            <a title="" class="leftUserDrop">
+            {% if user.username is defined %}
+            <img src="{{ user.userAvatar.path | apply_filter('avatar_user')}}" />
+            {% endif %}
+            <span>
+            <strong>3</strong>
+            </span>
+            </a>
+            <span>
+            {% if user.username is defined %}
+            {{ user.username }}
+            {% endif %}
+            </span>
+            <ul class="leftUser list-unstyled">
                 <li>
-                    <a href="{{ path('nc_interface_index') }}" title="" class="active" style="text-align:center">
-                        <i class="fa fa-pagelines fa-3x"></i>
-                        <span>Мониторинг</span>
-                    </a>
+                    <a href="#" title="" class="sProfile">Мой профиль</a>
                 </li>
                 <li>
-                    <a href="{{ path('nc_settings_index') }}" title="" class="active" style="text-align:center">
-                        <i class="fa fa-wrench fa-3x"></i>
-                        <span>Настройки</span>
-                    </a>
+                    <a href="#" title="" class="sMessages">Сообщения</a>
+                </li>
+                <li>
+                    <a href="{{ path('nc_settings_index') }}" title="" class="sSettings">Настройки</a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}" class="sLogout">Выход</a>
                 </li>
             </ul>
         </div>
+        <!-- Responsive nav -->
+        <div class="altNav">
+            <div class="userSearch">
+                <form action="">
+                    <input type="text" placeholder="search..." name="userSearch" />
+                    <input type="submit" value="" />
+                </form>
+            </div>
+            <!-- User nav -->
+            <ul class="userNav list-unstyled">
+                <li>
+                    <a href="#" title="" class="profile"></a>
+                </li>
+                <li>
+                    <a href="#" title="" class="messages"></a>
+                </li>
+                <li>
+                    <a href="#" title="" class="settings"></a>
+                </li>
+                <li>
+                    <a href="#" title="" class="logout"></a>
+                </li>
+            </ul>
+        </div>
+        <!-- Main nav -->
+        <ul class="nav list-unstyled">
+            <li>
+                <a href="{{ path('nc_interface_index') }}" title="" class="active" style="text-align:center">
+                <i class="fa fa-pagelines fa-3x"></i>
+                <span>Мониторинг</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('nc_settings_index') }}" title="" class="active" style="text-align:center">
+                <i class="fa fa-wrench fa-3x"></i>
+                <span>Настройки</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     {% endblock mainNav %}
-        
+
     {% block secNav %}
-
-        <!-- Secondary nav -->
-        <div class="secNav">
-            <div class="secWrapper">
-                <div class="secTop">
-                    <div class="balance">
-{#                         <div class="balInfo">
-                            Инфа
-                            <span>Ололо</span>
-                        </div>
-                        <div class="balAmount">
-                            <span class="balBars">
-                                <!--5,10,15,20,18,16,14,20,15,16,12,10--> </span>
-                            <span>Бабло ???</span>
-                        </div> #}
+    {% set user = app.security.getToken().getUser() %}
+    <!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <div class="secTop">
+                <div class="balance">
+                    <div class="balInfo">
+                        {% if user.username is defined %}
+                        {{ user.username }}
+                        {% endif %}
+                        <span>Разработчик</span>
                     </div>
-                    <a href="#" class="triangle-red"></a>
+                    <div class="balAmount">
+                        <span>{# Бабло ??? #}</span>
+                    </div>
                 </div>
+                <a href="#" class="triangle-red">
 
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#tab-sec-0-sessions" data-toggle="tab"><span class="fa fa-users fa-2"></span></a></li>
-                  <li><a href="#tab-sec-0-tasks" data-toggle="tab"><span class="fa fa-tasks fa-2"></span></a></li>
-                  <li><a href="#tab-sec-0-chat" data-toggle="tab"><span class="fa fa-comments-o fa-2"></span></a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab-sec-0-sessions">
-                        <div class="text-center">
-                            <p>
-                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code"> + </button>
-                            </p>
-                        </div>
-
-{#                         <p>
-                            <div class="text-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                        Добавить клиента<span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a data-toggle="modal" data-target="#modal-add-session"><span class="fa fa-user fa-2 pull-left"></span>Персона</a></li>
-                                        <li><a data-toggle="modal" data-target="#modal-add-session-group"><span class="fa fa-users fa-2 pull-left"></span>Группа</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </p> #}
-                        
-                        <div class="divider">
-                            <span></span>
+                </a>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab-sec-0-sessions" data-toggle="tab"><span class="fa fa-users fa-2"></span></a></li>
+                <li><a href="#tab-sec-0-tasks" data-toggle="tab"><span class="fa fa-tasks fa-2"></span></a></li>
+                <li><a href="#tab-sec-0-chat" data-toggle="tab"><span class="fa fa-comments-o fa-2"></span></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab-sec-0-sessions">
+                    <div class="text-center">
+                        <p>
+                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-request-cart-for-search-by-code"> + </button>
+                        </p>
+                    </div>
+                    {#                         <p>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            Добавить клиента<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a data-toggle="modal" data-target="#modal-add-session"><span class="fa fa-user fa-2 pull-left"></span>Персона</a></li>
+                                <li><a data-toggle="modal" data-target="#modal-add-session-group"><span class="fa fa-users fa-2 pull-left"></span>Группа</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="tab-sec-0-tasks">
-                      <p class="text-center">
+                    </p> #}
+
+                    <div class="divider">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab-sec-0-tasks">
+                    <p class="text-center">
                     {#                         <ul class="userList list-unstyled">
-                            <li>
-                                <a href="#" title="">
-                                    <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
-                                    <span class="contactName"> <strong>Eugene Kopyov
-                                            <span>(5)</span></strong>  <i>web &amp; ui designer</i>
-                                    </span>
-                                    <span class="status_away"></span>
-                                    <span class="clear"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="">
-                                    <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
-                                    <span class="contactName">
-                                        <strong>Lucy Wilkinson
-                                            <span>(12)</span></strong>  <i>Team leader</i>
-                                    </span>
-                                    <span class="status_off"></span>
-                                    <span class="clear"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="">
-                                    <img src="{{ asset('bundles/brainstrapcorenc/images/live/face3.png')}}" alt="" />
-                                    <span class="contactName">
-                                        <strong>John Dow</strong>
-                                        <i>PHP developer</i>
-                                    </span>
-                                    <span class="status_available"></span>
-                                    <span class="clear"></span>
-                                </a>
-                            </li>
-                        </ul> #}
-                        <div class="panel-group" id="accordion">
-                          <div class="panel panel-default">
+                        <li>
+                            <a href="#" title="">
+                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
+                            <span class="contactName"> <strong>Eugene Kopyov
+                            <span>(5)</span></strong>  <i>web &amp; ui designer</i>
+                            </span>
+                            <span class="status_away"></span>
+                            <span class="clear"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="">
+                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
+                            <span class="contactName">
+                            <strong>Lucy Wilkinson
+                            <span>(12)</span></strong>  <i>Team leader</i>
+                            </span>
+                            <span class="status_off"></span>
+                            <span class="clear"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="">
+                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face3.png')}}" alt="" />
+                            <span class="contactName">
+                            <strong>John Dow</strong>
+                            <i>PHP developer</i>
+                            </span>
+                            <span class="status_available"></span>
+                            <span class="clear"></span>
+                            </a>
+                        </li>
+                    </ul> #}
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                              <h4 class="panel-title">
+                                <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                  Задача 1
+                                Задача 1
                                 </a>
-                              </h4>
+                                </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
                             </div>
-                          </div>
-                          <div class="panel panel-default">
+                        </div>
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                              <h4 class="panel-title">
+                                <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                  Задача 2
+                                Задача 2
                                 </a>
-                              </h4>
+                                </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
                             </div>
-                          </div>
-                          <div class="panel panel-default">
+                        </div>
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                              <h4 class="panel-title">
+                                <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                  Задача 3
+                                Задача 3
                                 </a>
-                              </h4>
+                                </h4>
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </p>
                     </div>
-                    <div class="tab-pane fade" id="tab-sec-0-chat">
-                        <p>
-
-                        </p>
-
-                        <div class="divider">
-                            <span></span>
-                        </div>
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="tab-sec-0-chat">
+                    <p>
+                    </p>
+                    <div class="divider">
+                        <span></span>
                     </div>
                 </div>
-                <div class="clear"></div>
             </div>
+            <div class="clear"></div>
         </div>
+    </div>
     {% endblock secNav %}
 </div>
 {% endblock sidebar %}
-
-
-
 {% block content %}
 <div id="content">
     {% block contentTop %}
     <div class="contentTop">
         <span class="pageTitle">
-            <span class="icon-screen"></span>
-            Мониторниг 
+        <span class="icon-screen"></span>
+        Мониторниг
         </span>
         <ul class="quickStats list-unstyled" id="totalCountInfoBlock">
             <li>
                 <a href="" class="blueImg">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/plus.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/plus.png')}}" alt="" />
                 </a>
                 <div class="floatR">
                     <strong class="blue" nc-type='field' nc-field='sessionsCount'>0</strong>
@@ -295,7 +280,7 @@
             </li>
             <li>
                 <a href="" class="redImg">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/user.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/user.png')}}" alt="" />
                 </a>
                 <div class="floatR">
                     <strong class="blue" nc-type='field' nc-field='clientsCount'>0</strong>
@@ -304,7 +289,7 @@
             </li>
             <li>
                 <a href="" class="greenImg">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/money.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/quickstats/money.png')}}" alt="" />
                 </a>
                 <div class="floatR">
                     <strong class="blue" nc-type='field' nc-field='moneyCount'>0</strong>
@@ -315,147 +300,143 @@
         <div class="clear"></div>
     </div>
     {% endblock contentTop %}
-       
-    {% block breadLine %}
-        <!-- Breadcrumbs line -->
-        <div class="breadLine">
-{#             <div class="bc">
-                <ul id="breadcrumbs" class="breadcrumbs list-unstyled">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">UI elements</a>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="ui.html" title="">General elements</a>
-                            </li>
-                            <li>
-                                <a href="ui_icons.html" title="">Icons</a>
-                            </li>
-                            <li>
-                                <a href="ui_buttons.html" title="">Button sets</a>
-                            </li>
-                            <li>
-                                <a href="ui_custom.html" title="">Custom elements</a>
-                            </li>
-                            <li>
-                                <a href="ui_experimental.html" title="">Experimental</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="current">
-                        <a href="ui_grid.html" title="">Grid</a>
-                    </li>
-                </ul>
-            </div>
 
-            <div class="breadLinks">
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#" title="">
-                            <i class="icos-list"></i>
-                            <span>Orders</span>
-                            <strong>(+58)</strong>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" title="">
-                            <i class="icos-check"></i>
-                            <span>Tasks</span>
-                            <strong>(+12)</strong>
-                        </a>
-                    </li>
-                    <li class="has">
-                        <a title="">
-                            <i class="icos-money3"></i>
-                            <span>Invoices</span>
-                            <span>
-                                <img src="{{ asset('bundles/brainstrapcorenc/images/elements/control/hasddArrow.png')}}" alt="" />
-                            </span>
-                        </a>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#" title="">
-                                    <span class="icos-add"></span>
-                                    New invoice
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="">
-                                    <span class="icos-archive"></span>
-                                    History
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="">
-                                    <span class="icos-printer"></span>
-                                    Print invoices
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="clear"></div>
-            </div> #}
+    {% block breadLine %}
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        {#             <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs list-unstyled">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">UI elements</a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="ui.html" title="">General elements</a>
+                        </li>
+                        <li>
+                            <a href="ui_icons.html" title="">Icons</a>
+                        </li>
+                        <li>
+                            <a href="ui_buttons.html" title="">Button sets</a>
+                        </li>
+                        <li>
+                            <a href="ui_custom.html" title="">Custom elements</a>
+                        </li>
+                        <li>
+                            <a href="ui_experimental.html" title="">Experimental</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="current">
+                    <a href="ui_grid.html" title="">Grid</a>
+                </li>
+            </ul>
         </div>
+        <div class="breadLinks">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#" title="">
+                    <i class="icos-list"></i>
+                    <span>Orders</span>
+                    <strong>(+58)</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="">
+                    <i class="icos-check"></i>
+                    <span>Tasks</span>
+                    <strong>(+12)</strong>
+                    </a>
+                </li>
+                <li class="has">
+                    <a title="">
+                    <i class="icos-money3"></i>
+                    <span>Invoices</span>
+                    <span>
+                    <img src="{{ asset('bundles/brainstrapcorenc/images/elements/control/hasddArrow.png')}}" alt="" />
+                    </span>
+                    </a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#" title="">
+                            <span class="icos-add"></span>
+                            New invoice
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="">
+                            <span class="icos-archive"></span>
+                            History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="">
+                            <span class="icos-printer"></span>
+                            Print invoices
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div> #}
+    </div>
     {% endblock breadLine %}
-        
-        {% block wrapper %}
+
+    {% block wrapper %}
     <!-- Main content -->
     <div class="wrapper">
         <ul class="middleNavR list-unstyled">
             <li>
                 <a href="#" title="Add an article" class="tipN">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/create.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/create.png')}}" alt="" />
                 </a>
             </li>
             <li>
                 <a href="#" title="Upload files" class="tipN">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/upload.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/upload.png')}}" alt="" />
                 </a>
             </li>
             <li>
                 <a href="#" title="Add something" class="tipN">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/add.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/add.png')}}" alt="" />
                 </a>
             </li>
             <li>
                 <a href="#" title="Messages" class="tipN">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/dialogs.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/dialogs.png')}}" alt="" />
                 </a>
                 <strong>8</strong>
             </li>
             <li>
                 <a href="#" title="Check statistics" class="tipN">
-                    <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/stats.png')}}" alt="" />
+                <img src="{{ asset('bundles/brainstrapcorenc/images/icons/middlenav/stats.png')}}" alt="" />
                 </a>
             </li>
         </ul>
-
-
         <!-- 6 + 6 -->
         <div class="fluid">
-       <div class="widget">
-            <div class="whead"><h6>Table with opened toolbar</h6><div class="clear"></div></div>
-            <div id="dyn2" class="shownpars">
-                <a class="tOptions act" title="Options"><i class="fa fa-wrench fa-5"></i></a>
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" nc-interface-unit="data-table-sessions" width="100%">
-                            <thead>
-                                <tr>
-                                    <th width="15%">Код карты</th>
-                                    <th width="15%">Тип карты</th>
-                                    <th width="15%">Имя клиента</th>
-                                    <th width="15%">Дата создания сессии</th>
-                                    <th width="15%">Управление</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+            <div class="widget">
+                <div class="whead"><h6>Активные сессии</h6><div class="clear"></div></div>
+                <div id="dyn2" class="shownpars">
+                    <a class="tOptions act" title="Options"><i class="fa fa-wrench fa-5"></i></a>
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover" nc-interface-unit="data-table-sessions" width="100%">
+                        <thead>
+                            <tr>
+                                <th width="15%">Код карты</th>
+                                <th width="15%">Тип карты</th>
+                                <th width="15%">Имя клиента</th>
+                                <th width="15%">Дата создания сессии</th>
+                                <th width="15%">Управление</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-
+            </div>
             <!-- Messages #1 -->
-{#             <div class="widget grid12">
+            {#             <div class="widget grid12">
                 <div class="whead">
                     <h6>Messages layout #1</h6>
                     <div class="on_off">
@@ -464,116 +445,108 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-
                 <ul class="messagesOne list-unstyled">
                     <li class="by_user">
                         <a href="#" title="">
-                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
+                        <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
                         </a>
                         <div class="messageArea">
                             <span class="aro"></span>
                             <div class="infoRow">
                                 <span class="name">
-                                    <strong>John</strong>
-                                    says:
+                                <strong>John</strong>
+                                says:
                                 </span>
                                 <span class="time">3 hours ago</span>
                                 <div class="clear"></div>
                             </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                                    Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci.
+                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
                         </div>
                         <div class="clear"></div>
                     </li>
-
                     <li class="divider">
                         <span></span>
                     </li>
-
                     <li class="by_me">
                         <a href="#" title="">
-                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
+                        <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
                         </a>
                         <div class="messageArea">
                             <span class="aro"></span>
                             <div class="infoRow">
                                 <span class="name">
-                                    <strong>Eugene</strong>
-                                    says:
+                                <strong>Eugene</strong>
+                                says:
                                 </span>
                                 <span class="time">3 hours ago</span>
                                 <div class="clear"></div>
                             </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                                    Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci.
+                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
                         </div>
                         <div class="clear"></div>
                     </li>
-
                     <li class="by_me">
                         <a href="#" title="">
-                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
+                        <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
                         </a>
                         <div class="messageArea">
                             <span class="aro"></span>
                             <div class="infoRow">
                                 <span class="name">
-                                    <strong>Eugene</strong>
-                                    says:
+                                <strong>Eugene</strong>
+                                says:
                                 </span>
                                 <span class="time">3 hours ago</span>
                                 <div class="clear"></div>
                             </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                                    Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci.
+                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
                         </div>
                         <div class="clear"></div>
                     </li>
-
                     <li class="divider">
                         <span></span>
                     </li>
-
                     <li class="by_user">
                         <a href="#" title="">
-                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
+                        <img src="{{ asset('bundles/brainstrapcorenc/images/live/face1.png')}}" alt="" />
                         </a>
                         <div class="messageArea">
                             <span class="aro"></span>
                             <div class="infoRow">
                                 <span class="name">
-                                    <strong>John</strong>
-                                    says:
+                                <strong>John</strong>
+                                says:
                                 </span>
                                 <span class="time">3 hours ago</span>
                                 <div class="clear"></div>
                             </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                                    Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci.
+                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
                         </div>
                         <div class="clear"></div>
                     </li>
-
                     <li class="divider">
                         <span></span>
                     </li>
-
                     <li class="by_me">
                         <a href="#" title="">
-                            <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
+                        <img src="{{ asset('bundles/brainstrapcorenc/images/live/face2.png')}}" alt="" />
                         </a>
                         <div class="messageArea">
                             <span class="aro"></span>
                             <div class="infoRow">
                                 <span class="name">
-                                    <strong>Eugene</strong>
-                                    says:
+                                <strong>Eugene</strong>
+                                says:
                                 </span>
                                 <span class="time">3 hours ago</span>
                                 <div class="clear"></div>
                             </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                                    Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci.
+                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
                         </div>
                         <div class="clear"></div>
                     </li>
@@ -582,72 +555,60 @@
         </div>
     </div>
     <!-- Main content ends -->{% endblock wrapper %}</div>
-{% endblock content %}
-
-{# 1) Запрашивает карту по коду - OK #}
-{% block modal_request_cart %}
+    {% endblock content %}
+    {# 1) Запрашивает карту по коду - OK #}
+    {% block modal_request_cart %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalRequestCartForm')) }}
-{% endblock modal_request_cart %}
-
-{# 2) Окно ожидания результата запроса - OK #}
-{% block modal_request_wait %}
+    {% endblock modal_request_cart %}
+    {# 2) Окно ожидания результата запроса - OK #}
+    {% block modal_request_wait %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalRequestWaitForm')) }}
-{% endblock modal_request_wait %}
-
-{# 3) Окно добавления клиента и карты - OK #}
-{% block modal_add_cart_with_client %}
+    {% endblock modal_request_wait %}
+    {# 3) Окно добавления клиента и карты - OK #}
+    {% block modal_add_cart_with_client %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalCreateClientCartForm')) }}
-{% endblock modal_add_cart_with_client %}
-
-{# 4) Окно добавления сессии - OK #}
-{% block modal_add_session %}
+    {% endblock modal_add_cart_with_client %}
+    {# 4) Окно добавления сессии - OK #}
+    {% block modal_add_session %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalAddSessionForm')) }}
-{% endblock modal_add_session %}
-
-{# 5) Окно завершения сессии - OK #}
-{% block modal_remove_session %}
+    {% endblock modal_add_session %}
+    {# 5) Окно завершения сессии - OK #}
+    {% block modal_remove_session %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalRemoveSessionForm')) }}
-{% endblock modal_remove_session %}
-
-{# 6) Окно вывода информации о клиенте - OK #}
-{% block modal_client_info %}
+    {% endblock modal_remove_session %}
+    {# 6) Окно вывода информации о клиенте - OK #}
+    {% block modal_client_info %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalClientInfoForm')) }}
-{% endblock modal_client_info %}
-
-{# 7) Окно вывода информации о клиенте с формой создания сессии - OK #}
-{% block modal_client_info_with_session %}
+    {% endblock modal_client_info %}
+    {# 7) Окно вывода информации о клиенте с формой создания сессии - OK #}
+    {% block modal_client_info_with_session %}
     {{ render(controller('BrainstrapCoreNCBundle:Form/Form:getModalClientInfoWithCreateSessionForm')) }}
-{% endblock modal_client_info_with_session %}
-
-{% block stylesheets %}
+    {% endblock modal_client_info_with_session %}
+    {% block stylesheets %}
     {{ parent() }}
     {# {{ form_stylesheet(personalSessionType) }} #}
-
-{% endblock stylesheets %}
-
-{% block javascripts %}
+    {% endblock stylesheets %}
+    {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-
-        $ = jQuery;
-        $(function(){
-            window.bs.nc.core.functions.init(
-                    // Paths
-                    {
-                        "path_cart_search": "{{ path('cart_search') }}",
-                        "path_session_personalsession_create": "{{ path('session_personalsession_create') }}",
-                        "path_session_personalsession_delete": "{{ path('session_personalsession_delete') }}",
-                        "path_cart_create": "{{ path('cart_create') }}",
-                        "path_client_create": "{{ path('client_create') }}",
-                        "path_session_personalsession": "{{path('session_personalsession')}}",
-                        "path_info_total": "{{path('info_total')}}",
-                        "path_info_client_total": "{{path('info_client_total')}}",
-                        "path_info_money_total": "{{path('info_money_total')}}",
-                        "path_info_session_total":"{{path('info_session_total')}}"
-
-                    }
-                );
-        });
+            $ = jQuery;
+            $(function(){
+                window.bs.nc.core.functions.init(
+                        // Paths
+                        {
+                            "path_cart_search": "{{ path('cart_search') }}",
+                            "path_session_personalsession_create": "{{ path('session_personalsession_create') }}",
+                            "path_session_personalsession_delete": "{{ path('session_personalsession_delete') }}",
+                            "path_cart_create": "{{ path('cart_create') }}",
+                            "path_client_create": "{{ path('client_create') }}",
+                            "path_session_personalsession": "{{path('session_personalsession')}}",
+                            "path_info_total": "{{path('info_total')}}",
+                            "path_info_client_total": "{{path('info_client_total')}}",
+                            "path_info_money_total": "{{path('info_money_total')}}",
+                            "path_info_session_total":"{{path('info_session_total')}}"
+                        }
+                    );
+            });
     </script>
     {# {{ form_javascript(personalSessionType) }} #}
-{% endblock javascripts %}
+    {% endblock javascripts %}

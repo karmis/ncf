@@ -10,7 +10,9 @@ window.bs.nc.core.controllers.clientController = {
                 {
                     // Success
                     200: function(jsonClientInfo) {
-                    	window.bs.nc.core.commons.clearForm(fElClient);
+                        window.bs.nc.core.controllers.infoController.auto.getTotalClientInfo();
+                    	
+                        window.bs.nc.core.commons.clearForm(fElClient);
                     	window.bs.nc.core.commons.clearForm(fElCart);
 
                     	$("#modal-add-cart-with-client").modal('hide');

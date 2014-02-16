@@ -5,6 +5,7 @@ namespace Brainstrap\Core\NCBundle\Form\Session;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class RemoveSessionType extends AbstractType
 {
@@ -20,6 +21,14 @@ class RemoveSessionType extends AbstractType
                                 'mapped' => false,
                                 'error_bubbling' => true,
                             ))
+            ->add('statusComplete', 'entity', array(
+                    'class' => 'BrainstrapCoreNCBundle:Session\StatusSession',
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('ss')
+                            ->orderBy('ss.caption', 'DESC');
+                    },
+                    'empty_value' => false
+                ))
         ;
     }
     
@@ -38,6 +47,6 @@ class RemoveSessionType extends AbstractType
      */
     public function getName()
     {
-        return 'brainstrap_core_ncbundle_remove_session';
+        return 'brainstrap_core_ncbundle_remove_session_report';
     }
 }

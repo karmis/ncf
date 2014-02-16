@@ -7,7 +7,21 @@
       </div>
       <div class="modal-body">
         {{ form_start(removeSessionForm, { 'attr': {'class': 'form-horizontal', 'id': 'form-remove-session', 'role': 'form' } }) }}
-            {{ form_widget(removeSessionForm.session_id, {'attr': {'nc-type': 'field', 'nc-field': "sessionId"}}) }}            
+            {{ form_widget(removeSessionForm.session_id, {'attr': {'nc-type': 'field', 'nc-field': "sessionId"}}) }}
+
+
+
+            <div class="form-horizontal" role="form">
+              <div class="form-group">
+                <label for="article" class="col-md-2 control-label">Статус завершения:</label>
+                <div class="col-md-10">
+                    {{ form_widget(removeSessionForm.statusComplete, { 'attr': {'class': 'form-control validate-statusComplete', 'placeholder': 'Введите номер карты'} }) }}
+                    <div class="inputErrors">
+                        {{ form_errors(removeSessionForm.statusComplete) }}
+                    </div>
+                </div>
+              </div>
+            </div>
             
             {{ form_rest(removeSessionForm) }}
         {{ form_end(removeSessionForm) }}

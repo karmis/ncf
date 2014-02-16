@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="article" class="col-md-2 control-label">Номер:</label>
                 <div class="col-md-10">
-                    {{ form_widget(form.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты'} }) }}
+                    {{ form_widget(form.code, { 'attr': {'class': 'form-control validate-code', 'placeholder': 'Введите номер карты', 'nc-type':'field', 'nc-field': 'requestCartCode'} }) }}
                     <div class="inputErrors">
                         {{ form_errors(form.code) }}
                     </div>
